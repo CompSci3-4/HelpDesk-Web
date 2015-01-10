@@ -1,5 +1,6 @@
 <?php
-    $db = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', 'ljhs');
+    $config = parse_ini_file("../server.conf");
+    $db = new PDO("mysql:host={$config['host']};dbname={$config['database']};charset=utf8", "{$config['user']}", "{$config['password']}");
     $sql = 'SELECT tickets.date, tickets.description, statuses.name AS status, 
                    users.id AS uid, users.first AS ufirst, users.last AS ulast, 
                    consultants.id AS cid, consultants.first AS cfirst, consultants.last AS clast, 
@@ -28,12 +29,12 @@
                   $mname = $ticket['mfirst'] . ' ' . $ticket['mlast']; 
         ?>
             <tr>
-                <td><a href=<?php echo 'http://localhost/users/view.php?id=' . $ticket['uid']; ?>>
+                <td><a href=<?php echo '../users/view.php?id=' . $ticket['uid']; ?>>
                              <?php echo $uname; ?></a></td>
                 <td><?php echo $ticket['description']; ?></td>
-                <td><a href=<?php echo 'http://localhost/users/view.php?id=' . $ticket['cid']; ?>>
+                <td><a href=<?php echo '../users/view.php?id=' . $ticket['cid']; ?>>
                              <?php echo $cname; ?></a></td>
-                <td><a href=<?php echo 'http://localhost/users/view.php?id=' . $ticket['mid']; ?>>
+                <td><a href=<?php echo '../users/view.php?id=' . $ticket['mid']; ?>>
                              <?php echo $mname; ?></a></td>
                 <td><?php echo $ticket['status']; ?></td>
                 <td><?php echo $ticket['date']; ?></td>

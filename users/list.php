@@ -1,5 +1,6 @@
 <?php
-    $db = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', 'ljhs');
+    $config = parse_ini_file("../server.conf");
+    $db = new PDO("mysql:host={$config['host']};dbname={$config['database']};charset=utf8", "{$config['user']}", "{$config['password']}");
     $sql = 'SELECT users.id, users.first, users.last, users.email, users.room, positions.title 
             FROM users, positions 
             WHERE users.position = positions.id';
@@ -15,7 +16,7 @@
             </tr>
         <?php foreach($db->query($sql) as $row): ?>
             <tr>
-                <td><a href=<?php echo 'http://localhost/users/view.php?id=' . $row['id']; ?>>
+                <td><a href=<?php echo 'view.php?id=' . $row['id']; ?>>
                             <?php echo $row['first'] . ' ' . $row['last']; ?></a></td>
                 <td><?php echo $row['email']; ?></td>
                 <td><?php echo $row['title']; ?></td>
