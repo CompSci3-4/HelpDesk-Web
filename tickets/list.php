@@ -49,5 +49,10 @@
             </tr>
         <?php endforeach; ?>
         </table>
+        <h2>Create a Ticket</h2>
+        <form action="create.php" method="post"> 
+            <textarea name="description" placeholder="Enter Description"></textarea>
+            <input type="submit" value="Create Ticket"></input>
+        </form>
     </body>
 </html>
