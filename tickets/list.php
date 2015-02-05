@@ -20,7 +20,11 @@
             ";
 ?>
 <html>
-    <body>
+    <body style="background-color:lightblue">
+	<h1>
+	 Tickets
+	</h1>
+	On this page, you can view the tickets or, if you'd like, create a new ticket.<hr> 
         <table>
             <tr>
                 <td>ID</td>
@@ -51,8 +55,15 @@
         </table>
         <h2>Create a Ticket</h2>
         <form action="create.php" method="post"> 
+			<button type="button">Tickets Don't Work!</button> <br>
+			<button type="button">Problem with Promethean Board</button> <br>
+			<button type="button">Computer doesn't turn on</button> <br>
+			<button type="button">Audio doesn't work.</button> <br>
+			<button type="button">App isn't working.</button> <br>
+			<button type="button">Printer doesn't print.</button> <br>
+			<button type="button">Other</button> <br>
             <textarea name="description" placeholder="Enter Description"></textarea>
-            <input type="submit" value="Create Ticket"></input>
+            <button type="submit" style="height: 100px; width: 100px">Submit Your Ticket</button>
         </form>
     </body>
 </html>
