@@ -6,7 +6,7 @@
         header('Location: http://localhost/helpdesk/login.php', TRUE, 302);
     $config = parse_ini_file("../server.conf");
     $db = new PDO("mysql:host={$config['host']};dbname={$config['database']};charset=utf8", "{$config['user']}", "{$config['password']}");
-    $sql = "SELECT tickets.id, tickets.date, statuses.name AS status, 
+    $sql = "SELECT tickets.id, tickets.title, tickets.date, statuses.name AS status, 
                    users.id AS uid, users.first AS ufirst, users.last AS ulast, 
                    consultants.id AS cid, consultants.first AS cfirst, consultants.last AS clast, 
                    managers.id AS mid, managers.first AS mfirst, managers.last AS mlast 
@@ -37,7 +37,7 @@
         ?>
             <tr>
                 <td><a href=<?php echo 'view.php?id=' . $row['id']; ?>>
-                             <?php echo $row['id']; ?></a></td>
+                             <?php echo $row['title']; ?></a></td>
                 <td><a href=<?php echo '../users/view.php?id=' . $row['uid']; ?>>
                              <?php echo $uname; ?></a></td>
                 <td><a href=<?php echo '../users/view.php?id=' . $row['cid']; ?>>
@@ -51,6 +51,7 @@
         </table>
         <h2>Create a Ticket</h2>
         <form action="create.php" method="post"> 
+            <textarea name="title" placeholder="Enter Title"></textarea>
             <textarea name="description" placeholder="Enter Description"></textarea>
             <input type="submit" value="Create Ticket"></input>
         </form>
