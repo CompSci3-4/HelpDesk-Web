@@ -20,10 +20,15 @@
             ";
 ?>
 <html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
     <body>
+	<h1>Tickets</h1>
+	On this page, you can view the tickets or, if you'd like, create a new ticket.<hr> 
         <table>
             <tr>
-                <td>ID</td>
+                <td>Title</td>
                 <td>User</td>
                 <td>Consultant</td>
                 <td>Manager</td>
@@ -51,9 +56,9 @@
         </table>
         <h2>Create a Ticket</h2>
         <form action="create.php" method="post"> 
-            <textarea name="title" placeholder="Enter Title"></textarea>
+            <input name="title" type ="text" placeholder="Enter Title"></input>
             <textarea name="description" placeholder="Enter Description"></textarea>
-            <input type="submit" value="Create Ticket"></input>
+            <button class="submit" type="submit" >Submit</button>
         </form>
     </body>
 </html>

@@ -1,0 +1,9 @@
+body {
+    background-color: lightblue;
+}
+
+form * {
+    display: block;
+    width: 200px;
+    margin: 10px;
+}

@@ -13,6 +13,9 @@
             WHERE tickets.id = ' . $_GET['id'];
 ?>
 <html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
     <body>
         <table>
             <tr>

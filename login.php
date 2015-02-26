@@ -6,6 +6,9 @@
 	    ';
 ?>
 <html>
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
     <body>
         <form action="tickets/list.php" method="get"> 
             <select name="user">
