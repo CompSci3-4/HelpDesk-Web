@@ -1,11 +1,5 @@
 <?php
-    session_start();
-    if(isset($_GET['user']))
-        $_SESSION['id'] = $_GET['user'];
-    if(!isset($_SESSION['id']))
-        header('Location: http://localhost/helpdesk/login.php', TRUE, 302);
-    $config = parse_ini_file("../server.conf");
-    $db = new PDO("mysql:host={$config['host']};dbname={$config['database']};charset=utf8", "{$config['user']}", "{$config['password']}");
+    include("../start_session.php");
     $sql = "SELECT tickets.id, tickets.title, tickets.date, statuses.name AS status, 
                    users.id AS uid, users.first AS ufirst, users.last AS ulast, 
                    consultants.id AS cid, consultants.first AS cfirst, consultants.last AS clast, 
@@ -24,6 +18,7 @@
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
+    <?php include("../header.php") ?>
 	<h1>Tickets</h1>
 	On this page, you can view the tickets or, if you'd like, create a new ticket.<hr> 
         <table>

@@ -1,6 +1,5 @@
 <?php
-    $config = parse_ini_file("../server.conf");
-    $db = new PDO("mysql:host={$config['host']};dbname={$config['database']};charset=utf8", "{$config['user']}", "{$config['password']}");
+    include("../start_session.php");
     $sql = 'SELECT tickets.date, tickets.description, statuses.name AS status, 
                    users.id AS uid, users.first AS ufirst, users.last AS ulast, 
                    consultants.id AS cid, consultants.first AS cfirst, consultants.last AS clast, 
@@ -17,6 +16,7 @@
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
+    <?php include("../header.php") ?>
         <table>
             <tr>
                 <td>User</td>

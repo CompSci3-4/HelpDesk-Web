@@ -1,6 +1,5 @@
 <?php
-    $config = parse_ini_file("../server.conf");
-    $db = new PDO("mysql:host={$config['host']};dbname={$config['database']};charset=utf8", "{$config['user']}", "{$config['password']}");
+    include("../start_session.php");
     $sql = 'SELECT users.id, users.first, users.last, users.email, users.room, positions.title 
             FROM users, positions 
             WHERE users.position = positions.id and users.id = ' . $_GET['id'];
@@ -10,6 +9,7 @@
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
+    <?php include("../header.php") ?>
         <table>
             <tr>
                 <td>Name</td>
