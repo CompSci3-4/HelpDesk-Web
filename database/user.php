@@ -1,29 +1,30 @@
 <?php
+require_once("../globals.php");
 class User {
-    #Prepared SQL statements, for accessing the database
     private static $getName = null;
     private static $getEmail = null;
     private static $getRoomNumber = null;
     private static $getTitle = null;
 
-    public function __construct($id, $db) {
+    public function __construct($id) {
         $this->id = $id;
         $this->first = null;
         $this->last = null;
         $this->email = null;
         $this->room = null;
         $this->title = null;
-        #PHP doesn't allow expressions for static variable declarations, so I have to set them here.
-        if(!User::$getName)
-            User::$getName = $db->prepare('SELECT first, last FROM users WHERE id = :id');
-        if(!User::$getEmail)
-            User::$getEmail = $db->prepare('SELECT email FROM users WHERE id = :id');
-        if(!User::$getRoomNumber)
-            User::$getRoomNumber = $db->prepare('SELECT room FROM users WHERE id = :id');
-        if(!User::$getTitle)
-            User::$getTitle = $db->prepare('SELECT positions.title FROM users, positions 
+    }
+
+    #Initializes static attributes, because PHP does not allow expressions for normal
+    #static attribute declarations (e.g. private static $foo = someFunction(x);)
+    public static function init($db) {
+        User::$getName = $db->prepare('SELECT first, last FROM users WHERE id = :id');
+        User::$getEmail = $db->prepare('SELECT email FROM users WHERE id = :id');
+        User::$getRoomNumber = $db->prepare('SELECT room FROM users WHERE id = :id');
+        User::$getTitle = $db->prepare('SELECT positions.title FROM users, positions 
                                         WHERE users.position = positions.id and users.id = :id');
     }
+
 
     public function getFirst() {
         if(!$this->first) {
@@ -76,4 +77,6 @@ class User {
         return $this->title;
     }
 }
+
+User::init($db);
 ?>

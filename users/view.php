@@ -18,8 +18,7 @@
                 <td>Position</td>
                 <td>Room #</td>
             </tr>
-        <?php #$user = $db->query($sql)->fetch(PDO::FETCH_ASSOC); ?>
-        <?php $user = new User($_GET['id'], $db); ?>
+        <?php $user = new User($_GET['id']); ?>
             <tr>
                 <td><?php echo $user->getName(); ?></td>
                 <td><?php echo $user->getEmail(); ?></td>
