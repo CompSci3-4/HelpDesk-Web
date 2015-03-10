@@ -1,5 +1,5 @@
 <?php
-    include("../start_session.php");
+    require_once("../start_session.php");
     $sql = $db->prepare("INSERT INTO tickets
             (user, title, consultant, manager, description, status)
             values (:user, :title, :consultant, :manager, :description, 5)");

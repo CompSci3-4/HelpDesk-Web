@@ -1,5 +1,5 @@
 <?php
-    include("../start_session.php");
+    require_once("../start_session.php");
     $sql = 'SELECT users.id, users.first, users.last, users.email, users.room, positions.title 
             FROM users, positions 
             WHERE users.position = positions.id';

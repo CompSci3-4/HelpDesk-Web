@@ -1,5 +1,6 @@
 <?php
-    include("../start_session.php");
+    require_once("../start_session.php");
+    require_once("../database/user.php");
     $sql = 'SELECT users.id, users.first, users.last, users.email, users.room, positions.title 
             FROM users, positions 
             WHERE users.position = positions.id and users.id = ' . $_GET['id'];
@@ -17,12 +18,13 @@
                 <td>Position</td>
                 <td>Room #</td>
             </tr>
-        <?php $user = $db->query($sql)->fetch(PDO::FETCH_ASSOC); ?>
+        <?php #$user = $db->query($sql)->fetch(PDO::FETCH_ASSOC); ?>
+        <?php $user = new User($_GET['id'], $db); ?>
             <tr>
-                <td><?php echo $user['first'] . ' ' . $user['last']; ?></td>
-                <td><?php echo $user['email']; ?></td>
-                <td><?php echo $user['title']; ?></td>
-                <td><?php echo $user['room']; ?></td>
+                <td><?php echo $user->getName(); ?></td>
+                <td><?php echo $user->getEmail(); ?></td>
+                <td><?php echo $user->getTitle(); ?></td>
+                <td><?php echo $user->getRoom(); ?></td>
             </tr>
         </table>
     </body>

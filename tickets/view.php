@@ -1,5 +1,5 @@
 <?php
-    include("../start_session.php");
+    require_once("../start_session.php");
     $sql = 'SELECT tickets.date, tickets.description, statuses.name AS status, 
                    users.id AS uid, users.first AS ufirst, users.last AS ulast, 
                    consultants.id AS cid, consultants.first AS cfirst, consultants.last AS clast, 
