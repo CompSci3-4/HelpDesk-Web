@@ -1,5 +1,6 @@
 <?php
     require_once("../start_session.php");
+    require_once("../database/ticket.php");
     $sql = 'SELECT tickets.date, tickets.description, statuses.name AS status, 
                    users.id AS uid, users.first AS ufirst, users.last AS ulast, 
                    consultants.id AS cid, consultants.first AS cfirst, consultants.last AS clast, 
@@ -26,21 +27,21 @@
                 <td>Status</td>
                 <td>Date</td>
             </tr>
-        <?php $ticket = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-                  $uname = $ticket['ufirst'] . ' ' . $ticket['ulast']; 
-                  $cname = $ticket['cfirst'] . ' ' . $ticket['clast']; 
-                  $mname = $ticket['mfirst'] . ' ' . $ticket['mlast']; 
+        <?php $ticket = new Ticket($_GET['id']);#$ticket = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+              #    $uname = $ticket['ufirst'] . ' ' . $ticket['ulast']; 
+              #    $cname = $ticket['cfirst'] . ' ' . $ticket['clast']; 
+              #    $mname = $ticket['mfirst'] . ' ' . $ticket['mlast']; 
         ?>
             <tr>
-                <td><a href=<?php echo '../users/view.php?id=' . $ticket['uid']; ?>>
-                             <?php echo $uname; ?></a></td>
-                <td><?php echo $ticket['description']; ?></td>
-                <td><a href=<?php echo '../users/view.php?id=' . $ticket['cid']; ?>>
-                             <?php echo $cname; ?></a></td>
-                <td><a href=<?php echo '../users/view.php?id=' . $ticket['mid']; ?>>
-                             <?php echo $mname; ?></a></td>
-                <td><?php echo $ticket['status']; ?></td>
-                <td><?php echo $ticket['date']; ?></td>
+                <td><a href=<?php #echo '../users/view.php?id=' . $ticket['uid']; ?>>
+                             <?php #echo $uname; ?></a></td>
+                <td><?php echo $ticket->getDescription(); ?></td>
+                <td><a href=<?php #echo '../users/view.php?id=' . $ticket['cid']; ?>>
+                             <?php# echo $cname; ?></a></td>
+                <td><a href=<?php #echo '../users/view.php?id=' . $ticket['mid']; ?>>
+                             <?php# echo $mname; ?></a></td>
+                <td><?php #echo $ticket['status']; ?></td>
+                <td><?php echo $ticket->getDate(); ?></td>
             </tr>
         </table>
     </body>
