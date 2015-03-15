@@ -1,17 +1,7 @@
 <?php
-    require_once("../start_session.php");
-    $sql = "SELECT tickets.id, tickets.title, tickets.date, statuses.name AS status, 
-                   users.id AS uid, users.first AS ufirst, users.last AS ulast, 
-                   consultants.id AS cid, consultants.first AS cfirst, consultants.last AS clast, 
-                   managers.id AS mid, managers.first AS mfirst, managers.last AS mlast 
-            FROM tickets
-            LEFT JOIN statuses ON tickets.status = statuses.id
-            LEFT JOIN users ON tickets.user = users.id
-            LEFT JOIN users consultants ON tickets.consultant = consultants.id
-            LEFT JOIN users managers ON tickets.manager = managers.id
-            WHERE tickets.user = {$_SESSION['id']}
-            ORDER BY tickets.date DESC
-            ";
+require_once("../start_session.php");
+require_once("../database/user.php");
+$user = new User($_SESSION['id']);
 ?>
 <html>
     <head>
@@ -30,22 +20,18 @@
                 <td>Status</td>
                 <td>Date</td>
             </tr>
-        <?php foreach($db->query($sql) as $row):
-                  $uname = $row['ufirst'] . ' ' . $row['ulast']; 
-                  $cname = $row['cfirst'] . ' ' . $row['clast']; 
-                  $mname = $row['mfirst'] . ' ' . $row['mlast']; 
-        ?>
+        <?php foreach($user->getTickets() as $ticket):?>
             <tr>
-                <td><a href=<?php echo 'view.php?id=' . $row['id']; ?>>
-                             <?php echo $row['title']; ?></a></td>
-                <td><a href=<?php echo '../users/view.php?id=' . $row['uid']; ?>>
-                             <?php echo $uname; ?></a></td>
-                <td><a href=<?php echo '../users/view.php?id=' . $row['cid']; ?>>
-                             <?php echo $cname; ?></a></td>
-                <td><a href=<?php echo '../users/view.php?id=' . $row['mid']; ?>>
-                             <?php echo $mname; ?></a></td>
-                <td><?php echo $row['status']; ?></td>
-                <td><?php echo $row['date']; ?></td>
+                <td><a href=<?php echo 'view.php?id=' . $ticket->getID(); ?>>
+                             <?php echo $ticket->getTitle(); ?></a></td>
+                <td><a href=<?php echo '../users/view.php?id=' . $ticket->getUserID(); ?>>
+                             <?php echo $ticket->getUser()->getName(); ?></a></td>
+                <td><a href=<?php echo '../users/view.php?id=' . $ticket->getConsultantID(); ?>>
+                             <?php echo $ticket->getConsultant()->getName(); ?></a></td>
+                <td><a href=<?php echo '../users/view.php?id=' . $ticket->getManagerID(); ?>>
+                             <?php echo $ticket->getManager()->getName(); ?></a></td>
+                <td><?php echo $ticket->getStatus(); ?></td>
+                <td><?php echo $ticket->getDate(); ?></td>
             </tr>
         <?php endforeach; ?>
         </table>

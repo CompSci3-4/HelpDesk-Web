@@ -1,8 +1,6 @@
 <?php
-    require_once("../start_session.php");
-    $sql = 'SELECT users.id, users.first, users.last, users.email, users.room, positions.title 
-            FROM users, positions 
-            WHERE users.position = positions.id';
+require_once("../start_session.php");
+require_once("../database/user.php");
 ?>
 <html>
     <head>
@@ -17,13 +15,13 @@
                 <td>Position</td>
                 <td>Room #</td>
             </tr>
-        <?php foreach($db->query($sql) as $row): ?>
+        <?php foreach(User::allUsers() as $user): ?>
             <tr>
-                <td><a href=<?php echo 'view.php?id=' . $row['id']; ?>>
-                            <?php echo $row['first'] . ' ' . $row['last']; ?></a></td>
-                <td><?php echo $row['email']; ?></td>
-                <td><?php echo $row['title']; ?></td>
-                <td><?php echo $row['room']; ?></td>
+                <td><a href=<?php echo 'view.php?id=' . $user->getID(); ?>>
+                            <?php echo $user->getName(); ?></a></td>
+                <td><?php echo $user->getEmail(); ?></td>
+                <td><?php echo $user->getTitle(); ?></td>
+                <td><?php echo $user->getRoom(); ?></td>
             </tr>
         <?php endforeach; ?>
         </table>
