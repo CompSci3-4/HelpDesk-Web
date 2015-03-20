@@ -60,9 +60,9 @@ class Ticket implements JsonSerializable {
             'description' => $this->description,
             'status' => $this->status,
             'date' => $this->date,
-            'user' => $config['root_directory'] . '/users/view.php?id=' . $this->uid,
-            'consultant' => $config['root_directory'] . '/users/view.php?id=' . $this->cid,
-            'manager' => $config['root_directory'] . '/users/view.php?id=' . $this->mid
+            'user' => $this->getUser()->getJSON(),
+            'consultant' => $this->getConsultant()->getJSON(),
+            'manager' => $this->getManager()->getJSON(),
         ];
     }
 
@@ -73,6 +73,14 @@ class Ticket implements JsonSerializable {
     public static function init($config, $db) {
         Ticket::$config = $config;
         Ticket::$db = $db;
+    }
+
+    public function getJSON() {
+        return Ticket::$config['root_directory'] . '/tickets/view.json?id=' . $this->id;
+    }
+
+    public function getHTML() {
+        return Ticket::$config['root_directory'] . '/tickets/view.php?id=' . $this->id;
     }
 
     public function getID() {

@@ -17,7 +17,7 @@ require_once("../database/user.php");
             </tr>
         <?php foreach(User::allUsers() as $user): ?>
             <tr>
-                <td><a href=<?php echo 'view.php?id=' . $user->getID(); ?>>
+                <td><a href=<?php echo $user->getHTML(); ?>>
                             <?php echo $user->getName(); ?></a></td>
                 <td><?php echo $user->getEmail(); ?></td>
                 <td><?php echo $user->getTitle(); ?></td>

@@ -22,13 +22,13 @@ $user = new User($_SESSION['id']);
             </tr>
         <?php foreach($user->getTickets() as $ticket):?>
             <tr>
-                <td><a href=<?php echo 'view.php?id=' . $ticket->getID(); ?>>
+                <td><a href=<?php echo $ticket->getHTML(); ?>>
                              <?php echo $ticket->getTitle(); ?></a></td>
-                <td><a href=<?php echo '../users/view.php?id=' . $ticket->getUserID(); ?>>
+                <td><a href=<?php echo $ticket->getUser()->getHTML(); ?>>
                              <?php echo $ticket->getUser()->getName(); ?></a></td>
-                <td><a href=<?php echo '../users/view.php?id=' . $ticket->getConsultantID(); ?>>
+                <td><a href=<?php echo $ticket->getConsultant()->getHTML(); ?>>
                              <?php echo $ticket->getConsultant()->getName(); ?></a></td>
-                <td><a href=<?php echo '../users/view.php?id=' . $ticket->getManagerID(); ?>>
+                <td><a href=<?php echo $ticket->getManager()->getHTML(); ?>>
                              <?php echo $ticket->getManager()->getName(); ?></a></td>
                 <td><?php echo $ticket->getStatus(); ?></td>
                 <td><?php echo $ticket->getDate(); ?></td>

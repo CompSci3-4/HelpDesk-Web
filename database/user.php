@@ -29,19 +29,31 @@ class User implements JsonSerializable {
         $this->room = $results['room'];
         $this->title = $results['title'];
     }
+
     public function jsonSerialize() {
         $config = User::$config;
+        $tickets = [];
+        foreach($this->getTickets() as $ticket)
+            array_push($tickets, $ticket->getJSON());
         return [
             'id' => $this->id,
             'first' => $this->first,
             'last' => $this->last,
             'email' => $this->email,
             'room' => $this->room,
-            'title' => $this->title
+            'title' => $this->title,
+            'tickets' => $tickets
         ];
     }
-    
-    
+
+    public function getJSON() {
+        return User::$config['root_directory'] . '/users/view.json?id=' . $this->id;
+    }
+
+    public function getHTML() {
+        return User::$config['root_directory'] . '/users/view.php?id=' . $this->id;
+    }
+
     #Initializes static attributes, because PHP does not allow expressions for normal
     #static attribute declarations (e.g. private static $foo = someFunction(x);)
     public static function init($config, $db) {
