@@ -1,9 +1,10 @@
 <?php
 require_once("../globals.php");
 require_once("ticket.php");
-class User {
+class User implements JsonSerializable {
 
     private static $db = null;
+    private static $config = null;
     private $id;
     private $first;
     private $last;
@@ -28,10 +29,23 @@ class User {
         $this->room = $results['room'];
         $this->title = $results['title'];
     }
-
+    public function jsonSerialize() {
+        $config = User::$config;
+        return [
+            'id' => $this->id,
+            'first' => $this->first,
+            'last' => $this->last,
+            'email' => $this->email,
+            'room' => $this->room,
+            'title' => $this->title
+        ];
+    }
+    
+    
     #Initializes static attributes, because PHP does not allow expressions for normal
     #static attribute declarations (e.g. private static $foo = someFunction(x);)
-    public static function init($db) {
+    public static function init($config, $db) {
+        User::$config = $config;
         User::$db = $db;
     }
 
@@ -90,5 +104,5 @@ class User {
     }
 }
 
-User::init($db);
+User::init($config, $db);
 ?>

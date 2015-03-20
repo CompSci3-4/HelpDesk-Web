@@ -1,10 +1,15 @@
 <?php
-#TODO Methods for accessing Users and statuses
 require_once("../globals.php");
 require_once("user.php");
-class Ticket {
+/**
+ * A help ticket within the system.
+ *
+ * This class serves as a wrapper for SQL queries, so that one does not need to understand SQL or databases to manipulate tickets.
+ */
+class Ticket implements JsonSerializable {
 
     private static $db = null;
+    private static $config = null;
     private $id;
     private $title;
     private $description;
@@ -16,7 +21,11 @@ class Ticket {
     private $user;
     private $manager;
     private $consultant;
-
+    /**
+     * Finds a ticket within the database, with the given ID.
+     *
+     * @param int $id The ID of the ticket. IDs can be found in the database.
+     */
     public function __construct($id) {
         $this->id = $id;
         $query = Ticket::$db->prepare(
@@ -43,9 +52,26 @@ class Ticket {
         $this->mid = $results['mid'];
     }
 
-    #Initializes static attributes, because PHP does not allow expressions for normal
-    #static attribute declarations (e.g. private static $foo = someFunction(x);)
-    public static function init($db) {
+    public function jsonSerialize() {
+        $config = Ticket::$config;
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'status' => $this->status,
+            'date' => $this->date,
+            'user' => $config['root_directory'] . '/users/view.php?id=' . $this->uid,
+            'consultant' => $config['root_directory'] . '/users/view.php?id=' . $this->cid,
+            'manager' => $config['root_directory'] . '/users/view.php?id=' . $this->mid
+        ];
+    }
+
+    /**
+     * Initializes class constants.
+     * @param PDO $db The database to read tickets from.
+     */
+    public static function init($config, $db) {
+        Ticket::$config = $config;
         Ticket::$db = $db;
     }
 
@@ -100,5 +126,5 @@ class Ticket {
     }
 }
 
-Ticket::init($db);
+Ticket::init($config, $db);
 ?>
