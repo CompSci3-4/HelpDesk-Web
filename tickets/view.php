@@ -8,6 +8,9 @@ require_once("../database/ticket.php");
     </head>
     <body>
     <?php include("../header.php") ?>
+        <form action=<?php echo 'list.php?user=' . $_SESSION['id']; ?> method="get"> 
+            <button class="submit" type="submit" >Back</button>
+        </form>
         <table>
             <tr>
                 <td>User</td>

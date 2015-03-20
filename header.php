@@ -1,3 +1,3 @@
-<?php
-echo '<a href="' . $config['root_directory'] . '/logout.php">Logout</a>';
-?>
+<form action="../logout.php" method="get"> 
+    <button class="submit" type="submit" >Logout</button>
+</form>
