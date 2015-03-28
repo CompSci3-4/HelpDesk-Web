@@ -1,7 +1,7 @@
 <?php
 require_once("../globals.php");
 require_once("ticket.php");
-class User implements JsonSerializable {
+class User {
 
     private static $db = null;
     private static $config = null;
@@ -34,10 +34,10 @@ class User implements JsonSerializable {
 
     public function jsonSerialize() {
         $config = User::$config;
-        $tickets = [];
+        $tickets = array();
         foreach($this->getTickets() as $ticket)
             array_push($tickets, $ticket->getJSON());
-        return [
+        return array(
             'id' => $this->id,
             'first' => $this->first,
             'last' => $this->last,
@@ -45,7 +45,7 @@ class User implements JsonSerializable {
             'room' => $this->room,
             'title' => $this->title,
             'tickets' => $tickets
-        ];
+        );
     }
 
     public function getJSON() {
@@ -66,7 +66,7 @@ class User implements JsonSerializable {
     public static function allUsers() {
         $query = User::$db->prepare('SELECT id FROM users');
         $query->execute();
-        $users = [];
+        $users = array();
         foreach($query->fetchAll() as $user)
             array_push($users, new User($user['id']));
         return $users;
@@ -109,7 +109,7 @@ class User implements JsonSerializable {
             $query->bindValue(':id', $this->id);
             $query->execute();
             $results = $query->fetchAll();
-            $this->tickets = [];
+            $this->tickets = array();
             foreach($results as $result) {
                 array_push($this->tickets, new Ticket($result['id']));
             }

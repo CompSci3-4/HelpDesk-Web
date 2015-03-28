@@ -6,7 +6,7 @@ require_once("user.php");
  *
  * This class serves as a wrapper for SQL queries, so that one does not need to understand SQL or databases to manipulate tickets.
  */
-class Ticket implements JsonSerializable {
+class Ticket {
 
     private static $db = null;
     private static $config = null;
@@ -54,7 +54,7 @@ class Ticket implements JsonSerializable {
 
     public function jsonSerialize() {
         $config = Ticket::$config;
-        return [
+        return array(
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
@@ -63,7 +63,7 @@ class Ticket implements JsonSerializable {
             'user' => $this->getUser()->getJSON(),
             'consultant' => $this->getConsultant()->getJSON(),
             'manager' => $this->getManager()->getJSON(),
-        ];
+        );
     }
 
     /**

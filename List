@@ -1,0 +1,25 @@
+<?php
+    require_once("../start_session.php");
+    require_once("../database/message.php");
+?>
+<html>
+<head>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<?php include("../header.php") ?>
+<table>
+<tr>
+<td>ticket</td>
+</tr>
+<?php foreach (Message:: ticket() as $tick): ?>
+    <tr>
+    <td><a href=<?php echo $tick->getHTML(); ?>>
+    <?php echo $tick->getName(); ?></a></td>
+    <td><?php echo $tick->getTitle(); ?></td>
+    <td><?php echo $tick->getMessage(); ?></td>
+    </tr>
+<?php endforeach; ?>
+</table>
+</body>
+</html>
