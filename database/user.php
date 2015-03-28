@@ -12,6 +12,8 @@ class User implements JsonSerializable {
     private $room;
     private $title;
     private $tickets;
+    private $consultantTickets;
+    private $managerTickets;
 
     public function __construct($id) {
         $this->id = $id;
@@ -113,6 +115,44 @@ class User implements JsonSerializable {
             }
         }
         return $this->tickets;
+    }
+
+    public function getConsultantTickets() {
+        if($this->title === 'user')
+            return null;
+        if(!isset($this->consultantTickets)) {
+            $query = User::$db->prepare("SELECT id
+                                  FROM tickets
+                                  WHERE tickets.consultant = :id
+                                  ORDER BY tickets.date DESC");
+            $query->bindValue(':id', $this->id);
+            $query->execute();
+            $results = $query->fetchAll();
+            $this->consultantTickets = [];
+            foreach($results as $result) {
+                array_push($this->consultantTickets, new Ticket($result['id']));
+            }
+        }
+        return $this->consultantTickets;
+    }
+
+    public function getManagerTickets() {
+        if($this->title === 'user' or $this->title === 'consultant')
+            return null;
+        if(!isset($this->managerTickets)) {
+            $query = User::$db->prepare("SELECT id
+                                  FROM tickets
+                                  WHERE tickets.manager = :id
+                                  ORDER BY tickets.date DESC");
+            $query->bindValue(':id', $this->id);
+            $query->execute();
+            $results = $query->fetchAll();
+            $this->managerTickets = [];
+            foreach($results as $result) {
+                array_push($this->managerTickets, new Ticket($result['id']));
+            }
+        }
+        return $this->managerTickets;
     }
 }
 

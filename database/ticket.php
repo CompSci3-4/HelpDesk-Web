@@ -132,6 +132,31 @@ class Ticket implements JsonSerializable {
             $this->manager = new User($this->getManagerID());
         return $this->manager;
     }
+
+    public static function createTable($tickets, $userColumn = true, $consultantColumn = true, $managerColumn = true) {
+        $str =
+        '<table>
+            <tr>
+                <td>Title</td>
+                <td>User</td>
+                <td>Consultant</td>
+                <td>Manager</td>
+                <td>Status</td>
+                <td>Date</td>
+            </tr>';
+        foreach($tickets as $ticket){
+            $str .=
+            "<tr>
+                <td><a href={$ticket->getHTML()}>{$ticket->getTitle()}</a></td>
+                <td><a href={$ticket->getUser()->getHTML()}>{$ticket->getUser()->getName()}</a></td>
+                <td><a href={$ticket->getConsultant()->getHTML()}>{$ticket->getConsultant()->getName()}</a></td>
+                <td><a href={$ticket->getManager()->getHTML()}>{$ticket->getManager()->getName()}</a></td>
+                <td>{$ticket->getStatus()}</td>
+                <td>{$ticket->getDate()}</td>
+            </tr>";
+        }
+        return $str . '</table>';
+    }
 }
 
 Ticket::init($config, $db);
