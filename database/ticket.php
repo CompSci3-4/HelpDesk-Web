@@ -137,23 +137,28 @@ class Ticket {
         $str =
         '<table>
             <tr>
-                <td>Title</td>
-                <td>User</td>
-                <td>Consultant</td>
-                <td>Manager</td>
-                <td>Status</td>
-                <td>Date</td>
+                <td>Title</td>';
+        if($userColumn)
+                $str .= '<td>User</td>';
+        if($consultantColumn)
+                $str .= '<td>Consultant</td>';
+        if($managerColumn)
+                $str .= '<td>Manager</td>';
+        $str .= '<td>Status</td>
+                 <td>Date</td>
             </tr>';
         foreach($tickets as $ticket){
-            $str .=
-            "<tr>
-                <td><a href={$ticket->getHTML()}>{$ticket->getTitle()}</a></td>
-                <td><a href={$ticket->getUser()->getHTML()}>{$ticket->getUser()->getName()}</a></td>
-                <td><a href={$ticket->getConsultant()->getHTML()}>{$ticket->getConsultant()->getName()}</a></td>
-                <td><a href={$ticket->getManager()->getHTML()}>{$ticket->getManager()->getName()}</a></td>
-                <td>{$ticket->getStatus()}</td>
+            $str .= "<tr>
+                <td><a href={$ticket->getHTML()}>{$ticket->getTitle()}</a></td>";
+            if($userColumn)
+                $str .= "<td><a href={$ticket->getUser()->getHTML()}>{$ticket->getUser()->getName()}</a></td>";
+            if($consultantColumn)
+                $str .= "<td><a href={$ticket->getConsultant()->getHTML()}>{$ticket->getConsultant()->getName()}</a></td>";
+            if($managerColumn)
+                $str .= "<td><a href={$ticket->getManager()->getHTML()}>{$ticket->getManager()->getName()}</a></td>";
+            $str .= "<td>{$ticket->getStatus()}</td>
                 <td>{$ticket->getDate()}</td>
-            </tr>";
+                </tr>";
         }
         return $str . '</table>';
     }
