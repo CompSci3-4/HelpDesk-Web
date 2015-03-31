@@ -1,7 +1,7 @@
 <?php
 require_once("../globals.php");
 require_once("ticket.php");
-class User {
+class User implements JsonSerializable {
 
     private static $db = null;
     private static $config = null;
@@ -37,6 +37,16 @@ class User {
         $tickets = array();
         foreach($this->getTickets() as $ticket)
             array_push($tickets, $ticket->getJSON());
+        $consultantTickets = array();
+        foreach($this->getConsultantTickets() as $ticket)
+            array_push($consultantTickets, $ticket->getJSON());
+        $managerTickets = array();
+        foreach($this->getManagerTickets() as $ticket)
+            array_push($managerTickets, $ticket->getJSON());
+        $tickets = array(
+            'personal' => $tickets,
+            'consultant for' => $consultantTickets,
+            'manager for' => $managerTickets);
         return array(
             'id' => $this->id,
             'first' => $this->first,

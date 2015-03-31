@@ -6,7 +6,7 @@ require_once("user.php");
  *
  * This class serves as a wrapper for SQL queries, so that one does not need to understand SQL or databases to manipulate tickets.
  */
-class Ticket {
+class Ticket implements JsonSerializable {
 
     private static $db = null;
     private static $config = null;
