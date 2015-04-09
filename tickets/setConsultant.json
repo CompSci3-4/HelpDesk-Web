@@ -1,0 +1,7 @@
+<?php
+    require_once("../database/ticket.php");
+    $ticket = new Ticket($_POST['ticketID']);
+    $consultant = new User($_POST['consultantID']);
+    $ticket->setConsultant($consultant);
+    echo json_encode($ticket);
+?>

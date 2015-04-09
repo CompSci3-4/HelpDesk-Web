@@ -1,5 +1,5 @@
 <?php
     require_once("../database/ticket.php");
-    $user = new Ticket($_GET['id']);
-    echo json_encode($user);
+    $ticket = new Ticket($_GET['id']);
+    echo json_encode($ticket);
 ?>

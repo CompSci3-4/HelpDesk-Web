@@ -140,7 +140,8 @@ class Ticket implements JsonSerializable {
         $query->bindValue(':id', $this->id);
         $query->bindValue(':consultant', $newConsultant->getID());
         $query->execute();
-        $this->consultant = $newConsultant->getID();
+        $this->cid = $newConsultant->getID();
+        $this->consultant = $newConsultant;
     }
 
     public function getManagerID() {
@@ -160,7 +161,8 @@ class Ticket implements JsonSerializable {
         $query->bindValue(':id', $this->id);
         $query->bindValue(':manager', $newManager->getID());
         $query->execute();
-        $this->manager = $newManager->getID();
+        $this->mid = $newManager->getID();
+        $this->manager = $newManager;
     }
 
     public static function createTable($tickets, $userColumn = true, $consultantColumn = true, $managerColumn = true) {

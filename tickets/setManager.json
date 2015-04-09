@@ -1,0 +1,7 @@
+<?php
+    require_once("../database/ticket.php");
+    $ticket = new Ticket($_POST['ticketID']);
+    $manager = new User($_POST['managerID']);
+    $ticket->setManager($manager);
+    echo json_encode($ticket);
+?>
