@@ -99,6 +99,16 @@ class Ticket implements JsonSerializable {
         return Status::toString($this->status);
     }
 
+    public function setStatus($newStatus) {
+        $this->status = $newStatus;
+        $query = Ticket::$db->prepare('UPDATE tickets
+            SET status = :status
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':status', $newStatus);
+        $query->execute();
+    }
+
     public function getDate() {
         return $this->date;
     }
@@ -123,6 +133,16 @@ class Ticket implements JsonSerializable {
         return $this->consultant;
     }
 
+    public function setConsultant($newConsultant) {
+        $query = Ticket::$db->prepare('UPDATE tickets
+            SET consultant = :consultant
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':consultant', $newConsultant->getID());
+        $query->execute();
+        $this->consultant = $newConsultant->getID();
+    }
+
     public function getManagerID() {
         return $this->mid;
     }
@@ -131,6 +151,16 @@ class Ticket implements JsonSerializable {
         if(!isset($this->manager))
             $this->manager = new User($this->getManagerID());
         return $this->manager;
+    }
+
+    public function setManager($newManager) {
+        $query = Ticket::$db->prepare('UPDATE tickets
+            SET manager = :manager
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':manager', $newManager->getID());
+        $query->execute();
+        $this->manager = $newManager->getID();
     }
 
     public static function createTable($tickets, $userColumn = true, $consultantColumn = true, $managerColumn = true) {
