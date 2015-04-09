@@ -107,7 +107,7 @@ class User implements JsonSerializable {
         return $this->email;
     }
 
-    public function getPositon() {
+    public function getPosition() {
         return Position::toString($this->position);
     }
 

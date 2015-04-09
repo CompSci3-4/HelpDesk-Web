@@ -19,7 +19,7 @@
             <tr>
                 <td><?php echo $user->getName(); ?></td>
                 <td><?php echo $user->getEmail(); ?></td>
-                <td><?php echo $user->getTitle(); ?></td>
+                <td><?php echo $user->getPosition(); ?></td>
                 <td><?php echo $user->getRoom(); ?></td>
             </tr>
         </table>

@@ -1,6 +1,7 @@
 <?php
 require_once("../globals.php");
 require_once("user.php");
+require_once("status.php");
 /**
  * A help ticket within the system.
  *
@@ -30,12 +31,11 @@ class Ticket implements JsonSerializable {
         $this->id = $id;
         $query = Ticket::$db->prepare(
                  'SELECT tickets.title as title, tickets.date, tickets.description,
-                  statuses.name AS status, 
+                  tickets.status AS status, 
                   users.id AS uid, users.first AS ufirst, users.last AS ulast, 
                   consultants.id AS cid, consultants.first AS cfirst, consultants.last AS clast, 
                   managers.id AS mid, managers.first AS mfirst, managers.last AS mlast 
                   FROM tickets
-                  LEFT JOIN statuses ON tickets.status = statuses.id
                   LEFT JOIN users ON tickets.user = users.id
                   LEFT JOIN users consultants ON tickets.consultant = consultants.id
                   LEFT JOIN users managers ON tickets.manager = managers.id
@@ -58,7 +58,7 @@ class Ticket implements JsonSerializable {
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'status' => $this->status,
+            'status' => Status::toString($this->status),
             'date' => $this->date,
             'user' => $this->getUser()->getJSON(),
             'consultant' => $this->getConsultant()->getJSON(),
@@ -96,7 +96,7 @@ class Ticket implements JsonSerializable {
     }
 
     public function getStatus() {
-        return $this->status;
+        return Status::toString($this->status);
     }
 
     public function getDate() {
