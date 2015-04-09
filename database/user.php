@@ -1,6 +1,7 @@
 <?php
 require_once("../globals.php");
 require_once("ticket.php");
+require_once("position.php");
 class User implements JsonSerializable {
 
     private static $db = null;
@@ -10,7 +11,7 @@ class User implements JsonSerializable {
     private $last;
     private $email;
     private $room;
-    private $title;
+    private $position;
     private $tickets;
     private $consultantTickets;
     private $managerTickets;
@@ -18,10 +19,10 @@ class User implements JsonSerializable {
     public function __construct($id) {
         $this->id = $id;
         $query = User::$db->prepare(
-                 'SELECT users.first as first, users.last as last,
-                  users.email as email, users.room as room, positions.title as title
-                  FROM users, positions
-                  WHERE users.id = :id and users.position = positions.id');
+                 'SELECT first, last,
+                  email, room, position
+                  FROM users
+                  WHERE users.id = :id');
         $query->bindValue(':id', $this->id);
         $query->execute();
         $results = $query->fetch();
@@ -29,7 +30,7 @@ class User implements JsonSerializable {
         $this->last = $results['last'];
         $this->email = $results['email'];
         $this->room = $results['room'];
-        $this->title = $results['title'];
+        $this->position = $results['position'];
     }
 
     public function jsonSerialize() {
@@ -53,7 +54,7 @@ class User implements JsonSerializable {
             'last' => $this->last,
             'email' => $this->email,
             'room' => $this->room,
-            'title' => $this->title,
+            'position' => Position::toString($this->position),
             'tickets' => $tickets
         );
     }
@@ -106,8 +107,8 @@ class User implements JsonSerializable {
         return $this->email;
     }
 
-    public function getTitle() {
-        return $this->title;
+    public function getPositon() {
+        return Position::toString($this->position);
     }
 
     public function getTickets() {
@@ -128,7 +129,7 @@ class User implements JsonSerializable {
     }
 
     public function getConsultantTickets() {
-        if($this->title === 'user')
+        if($this->position < Position::Consultant)
             return null;
         if(!isset($this->consultantTickets)) {
             $query = User::$db->prepare("SELECT id
@@ -147,7 +148,7 @@ class User implements JsonSerializable {
     }
 
     public function getManagerTickets() {
-        if($this->title === 'user' or $this->title === 'consultant')
+        if($this->position < Position::Manager)
             return null;
         if(!isset($this->managerTickets)) {
             $query = User::$db->prepare("SELECT id
