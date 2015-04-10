@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.16-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.1.49, for Win32 (ia32)
 --
 -- Host: localhost    Database: helpdesk_testing
 -- ------------------------------------------------------
--- Server version	10.0.16-MariaDB-log
+-- Server version	5.1.49-community
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,14 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `helpdesk_testing`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `helpdesk_testing` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `helpdesk_testing`;
 
 --
 -- Table structure for table `messages`
@@ -36,9 +28,8 @@ CREATE TABLE `messages` (
   `content` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `ticket` (`ticket`),
-  CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`ticket`) REFERENCES `tickets` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `ticket` (`ticket`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +52,7 @@ CREATE TABLE `positions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +76,7 @@ CREATE TABLE `statuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,12 +109,8 @@ CREATE TABLE `tickets` (
   KEY `user` (`user`),
   KEY `consultant` (`consultant`),
   KEY `manager` (`manager`),
-  KEY `status` (`status`),
-  CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
-  CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`consultant`) REFERENCES `users` (`id`),
-  CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`manager`) REFERENCES `users` (`id`),
-  CONSTRAINT `tickets_ibfk_4` FOREIGN KEY (`status`) REFERENCES `statuses` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  KEY `status` (`status`)
+) ENGINE=MyISAM AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +119,7 @@ CREATE TABLE `tickets` (
 
 LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-INSERT INTO `tickets` VALUES (2,5,5,5,'computer exploded',5,'0000-00-00 00:00:00','help me pls'),(3,6,5,5,'CAPS LOCK IS STUCK',5,'0000-00-00 00:00:00','help me pls'),(5,5,NULL,NULL,'test',5,'2015-01-11 07:41:42','help me pls'),(6,5,NULL,NULL,'my printer is broken',5,'2015-01-11 07:43:55','help me pls'),(7,5,NULL,NULL,'It exploded',5,'2015-02-20 16:37:50','printer problems'),(8,5,NULL,NULL,'test',5,'2015-02-20 16:40:01','testing'),(9,5,NULL,NULL,'doesnt work',5,'2015-02-20 16:40:35','promethean board'),(10,5,NULL,NULL,'please fix my problem.',5,'2015-02-26 23:39:52','php will not install'),(11,5,NULL,NULL,'I don\'t have any real problems.',5,'2015-02-27 00:29:22','Testing');
+INSERT INTO `tickets` VALUES (2,6,7,9,'computer exploded',5,'0000-00-00 00:00:00','help me pls'),(3,6,7,9,'CAPS LOCK IS STUCK',5,'0000-00-00 00:00:00','help me pls'),(5,6,7,9,'test',5,'2015-01-11 07:41:42','help me pls'),(6,6,7,9,'my printer is broken',5,'2015-01-11 07:43:55','help me pls'),(7,6,7,9,'It exploded',5,'2015-02-20 16:37:50','printer problems'),(8,6,7,9,'test',5,'2015-02-20 16:40:01','testing'),(9,6,7,9,'doesnt work',5,'2015-02-20 16:40:35','promethean board'),(10,6,7,9,'please fix my problem.',5,'2015-02-26 23:39:52','php will not install'),(11,6,7,9,'I don\'t have any real problems.',5,'2015-02-27 00:29:22','Testing'),(12,6,7,9,'no problems, please give us all A+s.',5,'2015-02-27 18:45:29','Website DOES work'),(13,6,7,9,'just kidding, fail us all.',5,'2015-02-27 18:47:07','Website doesn\'t work'),(14,6,7,9,'why would I know?',5,'2015-02-27 18:50:08','maybe it does work'),(15,6,7,9,'His name isn\'t there.',5,'2015-02-27 19:00:47','How do I contact my consultant?'),(16,6,7,9,'My computer will not turn on. Please assist me soon.',5,'2015-02-27 19:04:01','Power Problems'),(17,6,7,9,'for real this time.',5,'2015-02-27 19:12:09','it works!'),(18,6,7,9,'what is happening',5,'2015-02-27 19:13:46','heloo'),(19,6,7,9,'I cannot find the button.',5,'2015-02-27 19:22:21','where is internet?'),(20,6,7,9,'He is sailing too much',5,'2015-02-27 19:27:31','Thomas is being annoying'),(21,6,7,9,'AAAAAAAAAAHHHHHHH',5,'2015-02-27 19:28:07','help'),(40,6,7,9,'',5,'2015-02-27 19:31:04','\"Hi\"'),(41,6,7,9,'Hope this works!',6,'2015-02-27 20:11:00','From Volger'),(42,6,7,8,'',5,'2015-03-02 18:43:44','Thomas is sooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo annoying'),(44,6,7,8,'My computer was hit by a bowling ball in a controlled explosion gone wrong. I BLAME MENDERS!!!!! Unfortunately the screen was separated from the computer. CAUSING THE PAINT TO CHIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! How do I paint a computer?  ',5,'2015-03-04 17:32:17','Bowling Ball'),(48,6,7,9,'Volger\r\n',6,'2015-03-20 17:54:37','Greg'),(102,6,7,8,'Just testing',5,'2015-04-10 17:50:19','Hi'),(101,7,7,8,'fixes\r\n',5,'2015-04-10 17:46:57','Testing'),(103,6,7,8,'are redirects working again?',6,'2015-04-10 17:52:52','Testing');
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,9 +138,8 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `room` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `position` (`position`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`position`) REFERENCES `positions` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  KEY `position` (`position`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +148,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'tom','garcia',1,'',0),(6,'john','doe',1,'johndoe@example.com',101);
+INSERT INTO `users` VALUES (6,'john','doe',1,'johndoe@example.com',101),(7,'Consultant','Charlie',2,'charlie@example.com',102),(8,'Manager','Moe',3,'moe@example.com',103),(9,'Admin','Alex',4,'alex@example.com',104);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -175,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-27  0:23:38
+-- Dump completed on 2015-04-10 10:55:40
