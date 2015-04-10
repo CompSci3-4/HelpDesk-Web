@@ -75,7 +75,19 @@ class User implements JsonSerializable {
     }
 
     public static function allUsers() {
-        $query = User::$db->prepare('SELECT id FROM users');
+        return User::listUsers(Position::User);
+    }
+
+    public static function allConsultants() {
+        return User::listUsers(Position::Consultant);
+    }
+
+    public static function allManagers() {
+        return User::listUsers(Position::Manager);
+    }
+
+    private static function listUsers($minPosition) {
+        $query = User::$db->prepare("SELECT id FROM users WHERE position >= $minPosition");
         $query->execute();
         $users = array();
         foreach($query->fetchAll() as $user)
@@ -109,6 +121,10 @@ class User implements JsonSerializable {
 
     public function getPosition() {
         return Position::toString($this->position);
+    }
+
+    public function getPositionID() {
+        return $this->position;
     }
 
     public function getTickets() {

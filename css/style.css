@@ -7,3 +7,7 @@ form * {
     width: 200px;
     margin: 10px;
 }
+
+.hidden-form {
+    display: none;
+}

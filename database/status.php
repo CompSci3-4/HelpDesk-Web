@@ -8,5 +8,9 @@ abstract class Status {
                     Status::Completed => "Completed"];
         return $strings[$id];
     }
+
+    public static function allStatuses() {
+        return [Status::InProgress, Status::Completed];
+    }
 }
 ?>

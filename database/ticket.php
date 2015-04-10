@@ -164,36 +164,6 @@ class Ticket implements JsonSerializable {
         $this->mid = $newManager->getID();
         $this->manager = $newManager;
     }
-
-    public static function createTable($tickets, $userColumn = true, $consultantColumn = true, $managerColumn = true) {
-        $str =
-        '<table>
-            <tr>
-                <td>Title</td>';
-        if($userColumn)
-                $str .= '<td>User</td>';
-        if($consultantColumn)
-                $str .= '<td>Consultant</td>';
-        if($managerColumn)
-                $str .= '<td>Manager</td>';
-        $str .= '<td>Status</td>
-                 <td>Date</td>
-            </tr>';
-        foreach($tickets as $ticket){
-            $str .= "<tr>
-                <td><a href={$ticket->getHTML()}>{$ticket->getTitle()}</a></td>";
-            if($userColumn)
-                $str .= "<td><a href={$ticket->getUser()->getHTML()}>{$ticket->getUser()->getName()}</a></td>";
-            if($consultantColumn)
-                $str .= "<td><a href={$ticket->getConsultant()->getHTML()}>{$ticket->getConsultant()->getName()}</a></td>";
-            if($managerColumn)
-                $str .= "<td><a href={$ticket->getManager()->getHTML()}>{$ticket->getManager()->getName()}</a></td>";
-            $str .= "<td>{$ticket->getStatus()}</td>
-                <td>{$ticket->getDate()}</td>
-                </tr>";
-        }
-        return $str . '</table>';
-    }
 }
 
 Ticket::init($config, $db);

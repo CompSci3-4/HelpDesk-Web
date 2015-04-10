@@ -1,0 +1,7 @@
+<?php
+    require_once("../database/ticket.php");
+    require_once("../database/status.php");
+    $ticket = new Ticket($_POST['ticketID']);
+    $ticket->setStatus($_POST['statusID']);
+    echo json_encode($ticket);
+?>
