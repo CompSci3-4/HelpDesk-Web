@@ -6,9 +6,9 @@
             #5 is the status code for In Progress (should find a more readable way to do this)
     $sql->bindParam(':user', $_SESSION['id']);
     $sql->bindParam(':title', $_POST['title']);
-    $sql->bindValue(':consultant', 5);
-    $sql->bindValue(':manager', 5);
+    $sql->bindValue(':consultant', 7);
+    $sql->bindValue(':manager', 8);
     $sql->bindParam(':description', $_POST['description']);
     $sql->execute();
-    header('Location: http://' . $config['root_directory'] . '/tickets/list.php', TRUE, 302);
+    header('Location: ' . $config['root_directory'] . '/tickets/list.php', TRUE, 302);
 ?>
