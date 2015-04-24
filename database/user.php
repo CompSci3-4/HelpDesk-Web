@@ -2,6 +2,9 @@
 require_once("../globals.php");
 require_once("ticket.php");
 require_once("position.php");
+/**
+ * A user within the system.
+ */
 class User implements JsonSerializable {
 
     private static $db = null;
@@ -16,6 +19,11 @@ class User implements JsonSerializable {
     private $consultantTickets;
     private $managerTickets;
 
+    /**
+     * Retrieves a user from the database.
+     *
+     * @param int $id the ID of the user to be retrieved.
+     */
     public function __construct($id) {
         $this->id = $id;
         $query = User::$db->prepare(
@@ -33,6 +41,11 @@ class User implements JsonSerializable {
         $this->position = $results['position'];
     }
 
+    /**
+     * Converts the User into JSON, for use with the API.
+     *
+     * @return string the JSON representation of the user.
+     */
     public function jsonSerialize() {
         $config = User::$config;
         $tickets = array();
@@ -59,33 +72,56 @@ class User implements JsonSerializable {
         );
     }
 
+    /**
+     * @return string the URL to retrieve the JSON version of this user.
+     */
     public function getJSON() {
         return User::$config['root_directory'] . '/users/view.json?id=' . $this->id;
     }
 
+    /**
+     * @return string the URL to retrieve the HTML representation of the user.
+     */
     public function getHTML() {
         return User::$config['root_directory'] . '/users/view.php?id=' . $this->id;
     }
 
-    #Initializes static attributes, because PHP does not allow expressions for normal
-    #static attribute declarations (e.g. private static $foo = someFunction(x);)
+    /**
+     * Initializes class constants.
+     * @param PDO $db The database to read users from.
+     */
     public static function init($config, $db) {
         User::$config = $config;
         User::$db = $db;
     }
 
+    /**
+     * @return array a list of all  users in the database.
+     */
     public static function allUsers() {
         return User::listUsers(Position::User);
     }
 
+    /**
+     * @return array a list of all consultants (or above) in the database.
+     */
     public static function allConsultants() {
         return User::listUsers(Position::Consultant);
     }
 
+    /**
+     * @return array a list of all managers (or above) in the database.
+     */
     public static function allManagers() {
         return User::listUsers(Position::Manager);
     }
 
+    /**
+     * Finds all users of at least a given rank.
+     *
+     * @param int $minPosition the minimum position of user's to list.
+     * @return array a list of all users of or above a certain position.
+     */
     private static function listUsers($minPosition) {
         $query = User::$db->prepare("SELECT id FROM users WHERE position >= $minPosition");
         $query->execute();
@@ -95,38 +131,65 @@ class User implements JsonSerializable {
         return $users;
     }
 
+    /**
+     * @return int the user's id.
+     */
     public function getID() {
         return $this->id;
     }
 
+    /**
+     * @return string the user's first name.
+     */
     public function getFirst() {
         return $this->first;
     }
 
+    /**
+     * @return string the user's last name.
+     */
     public function getLast() {
         return $this->last;
     }
 
+    /**
+     * @return string the user's full name.
+     */
     public function getName() {
         return $this->getFirst() . ' ' . $this->getLast();
     }
 
+    /**
+     * @return int the user's room number.
+     */
     public function getRoom() {
         return $this->room;
     }
 
+    /**
+     * @return string the user's email address.
+     */
     public function getEmail() {
         return $this->email;
     }
 
+    /**
+     * @return string the name of the user's position (e.g. consultant).
+     */
     public function getPosition() {
         return Position::toString($this->position);
     }
 
+    /**
+     * @return int the user's position.
+     */
     public function getPositionID() {
         return $this->position;
     }
 
+    /**
+     * @return array a list of all tickets created by the user.
+     */
     public function getTickets() {
         if(!isset($this->tickets)) {
             $query = User::$db->prepare("SELECT id
@@ -144,6 +207,9 @@ class User implements JsonSerializable {
         return $this->tickets;
     }
 
+    /**
+     * @return array a list of all tickets consulted by the user.
+     */
     public function getConsultantTickets() {
         if($this->position < Position::Consultant)
             return null;
@@ -163,6 +229,9 @@ class User implements JsonSerializable {
         return $this->consultantTickets;
     }
 
+    /**
+     * @return array a list of all tickets managed by the user.
+     */
     public function getManagerTickets() {
         if($this->position < Position::Manager)
             return null;

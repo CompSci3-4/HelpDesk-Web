@@ -52,6 +52,11 @@ class Ticket implements JsonSerializable {
         $this->mid = $results['mid'];
     }
 
+    /**
+     * Converts the Ticket into JSON, for use with the API.
+     *
+     * @return string the JSON representation of the ticket.
+     */
     public function jsonSerialize() {
         $config = Ticket::$config;
         return array(
@@ -75,30 +80,53 @@ class Ticket implements JsonSerializable {
         Ticket::$db = $db;
     }
 
+    /**
+     * @return string the URL to retrieve the JSON version of this ticket.
+     */
     public function getJSON() {
         return Ticket::$config['root_directory'] . '/tickets/view.json?id=' . $this->id;
     }
 
+    /**
+     * @return string the URL to retrieve the HTML representation of the ticket.
+     */
     public function getHTML() {
         return Ticket::$config['root_directory'] . '/tickets/view.php?id=' . $this->id;
     }
 
+    /**
+     * @return int the ticket's id number.
+     */
     public function getID() {
         return $this->id;
     }
 
+    /**
+     * @return string the ticket's official title.
+     */
     public function getTitle() {
         return $this->title;
     }
     
+    /**
+     * @return string a detailed description of the problem.
+     */
     public function getDescription() {
         return $this->description;
     }
 
+    /**
+     * @return int the ticket's status (a list of statuses can be found in status.php).
+     */
     public function getStatus() {
         return Status::toString($this->status);
     }
 
+    /**
+     * Updates the status of the ticket, both in the object and in the database.
+     *
+     * @param int the new status of the ticket.
+     */
     public function setStatus($newStatus) {
         $this->status = $newStatus;
         $query = Ticket::$db->prepare('UPDATE tickets
@@ -109,30 +137,48 @@ class Ticket implements JsonSerializable {
         $query->execute();
     }
 
+    /**
+     * @return string the date the ticket was created.
+     */
     public function getDate() {
         return $this->date;
     }
 
+    /**
+     * @return int the ID of the user who created the ticket.
+     */
     public function getUserID() {
         return $this->uid;
     }
 
+    /**
+     * @return User the User who created the ticket.
+     */
     public function getUser() {
         if(!isset($this->user))
             $this->user = new User($this->getUserID());
         return $this->user;
     }
 
+    /**
+     * @return int the ID of the user who consults for the ticket.
+     */
     public function getConsultantID() {
         return $this->cid;
     }
 
+    /**
+     * @return User the user who consults for the ticket.
+     */
     public function getConsultant() {
         if(!isset($this->consultant))
             $this->consultant = new User($this->getConsultantID());
         return $this->consultant;
     }
 
+    /**
+     * @param User $newConsultant the new consultant for the ticket.
+     */
     public function setConsultant($newConsultant) {
         $query = Ticket::$db->prepare('UPDATE tickets
             SET consultant = :consultant
@@ -144,16 +190,25 @@ class Ticket implements JsonSerializable {
         $this->consultant = $newConsultant;
     }
 
+    /**
+     * @return int the ID of the user who manages the ticket.
+     */
     public function getManagerID() {
         return $this->mid;
     }
 
+    /**
+     * @return User the user who managers the ticket.
+     */
     public function getManager() {
         if(!isset($this->manager))
             $this->manager = new User($this->getManagerID());
         return $this->manager;
     }
 
+    /**
+     * @param User $newManager the new manager for the ticket.
+     */
     public function setManager($newManager) {
         $query = Ticket::$db->prepare('UPDATE tickets
             SET manager = :manager
