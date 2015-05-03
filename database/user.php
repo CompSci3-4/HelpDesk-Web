@@ -1,19 +1,4 @@
 <?php
-echo '<div id="">
-<html>
-<body style="background-color:lightred">
-<h1>
- Tickets
-</h1>
-
-On this page, you can view the tickets.<hr> 
-<body>
-	 <button type="button">View Ticket1. Here is a basic summary: ______________ This ticket has been(resolved/not resolved)!</button> 
-	 <button type="button">View Ticket2. Here is a basic summary: ______________ This ticket has been(resolved/not resolved)!</button> 
-	 <button type="button">View Ticket3. Here is a basic summary: ______________ This ticket has been(resolved/not resolved)!</button> <br>
-	 <br><br> <a href="url">Click here to see the definition of the problem you entered.</a> <br>
-</html>
-</div>';
 require_once("../globals.php");
 require_once("ticket.php");
 require_once("position.php");
