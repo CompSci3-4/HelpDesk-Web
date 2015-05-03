@@ -43,6 +43,9 @@ class Ticket implements JsonSerializable {
         $query->bindValue(':id', $this->id);
         $query->execute();
         $results = $query->fetch();
+        if(!$results) {
+            throw new Exception("Invalid Ticket ID");
+        }
         $this->title = $results['title'];
         $this->description = $results['description'];
         $this->status = $results['status'];
