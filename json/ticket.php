@@ -9,25 +9,34 @@
         die();
     }
     $user = new User($_SESSION['id']);
-    if(!isset($_GET['id'])) {
-        #TODO get all tickets
-        http_response_code(501);
-        echo json_encode(['error' => 'NotImplementedYet']);
-        die();
-    }
-    try {
-        $ticket = new Ticket($_GET['id']);
-    }
-    catch(Exception $e) {
-        http_response_code(404);
-        echo json_encode(['error' => 'InvalidTicketID']);
-        die();
-    }
-    if($user == $ticket->getUser() or $user->getPosition() > Position::User) {
-        echo json_encode($ticket);
+    if($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if(!isset($_GET['id'])) {
+            $personal = $user->getTickets();
+            $consulted = $user->getConsultantTickets();
+            $managed = $user->getManagerTickets();
+            echo json_encode(['personal' => $personal,
+                              'consultantFor' => $consulted,
+                              'managerFor' => $managed]);
+            die();
+        }
+        try {
+            $ticket = new Ticket($_GET['id']);
+        }
+        catch(Exception $e) {
+            http_response_code(404);
+            echo json_encode(['error' => 'InvalidTicketID']);
+            die();
+        }
+        if($user == $ticket->getUser() or $user->getPosition() > Position::User) {
+            echo json_encode($ticket);
+        }
+        else {
+            http_response_code(403);
+            echo json_encode(['error' => 'NoAccessRight']);
+        }
     }
     else {
-        http_response_code(403);
-        echo json_encode(['error' => 'NoAccessRight']);
+        http_response_code(501);
+        echo json_encode(['error' => 'UnsupportedRequestMethod']);
     }
 ?>
