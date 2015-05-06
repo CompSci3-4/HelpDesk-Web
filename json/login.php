@@ -1,14 +1,12 @@
 <?php
-    include('../globals.php');
-    $user = $_GET['user'];
+    require_once('../globals.php');
+    require_once('../database/user.php');
+    $id = $_GET['user'];
     $password = $_GET['password'];
-    $query = $db->prepare('SELECT hash FROM users WHERE id = :id');
-    $query->bindValue(':id', $user);
-    $query->execute();
-    $hash = $query->fetch()['hash'];
-    if($hash === crypt($password, $hash)) {
+    $user = new User($id);
+    if($user->passwordMatches($password)) {
         session_start();
-        $_SESSION['id'] = $user;
+        $_SESSION['id'] = $id;
     }
     else {
         http_response_code(403);

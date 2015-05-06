@@ -48,19 +48,13 @@
         }
         $title = $_POST['title'];
         $description = $_POST['description'];
-        $sql = $db->prepare("INSERT INTO tickets
-                (user, title, consultant, manager, description, status)
-                values (:user, :title, :consultant, :manager, :description, 5)");
-                #5 is the status code for In Progress (should find a more readable way to do this)
-        $sql->bindValue(':user', $user->getID());
-        $sql->bindValue(':title', $title);
-        $sql->bindValue(':description', $description);
-        $sql->bindValue(':consultant', 7);
-        $sql->bindValue(':manager', 8);
-        $sql->execute();
-        echo json_encode(new Ticket($db->lastInsertID()));
+        echo json_encode(Ticket::createTicket($title, $description, $user));
     }
     else if($_SERVER['REQUEST_METHOD'] == 'PATCH') {
+        http_response_code(501);
+        echo json_encode(['error' => 'NotImplementedYet']);
+    }
+    else if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         http_response_code(501);
         echo json_encode(['error' => 'NotImplementedYet']);
     }

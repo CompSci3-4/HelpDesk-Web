@@ -55,6 +55,20 @@ class Ticket implements JsonSerializable {
         $this->mid = $results['mid'];
     }
 
+    public static function createTicket($title, $description, $user) {
+        $sql = Ticket::$db->prepare("INSERT INTO tickets
+                (user, title, consultant, manager, description, status)
+                values (:user, :title, :consultant, :manager, :description, 5)");
+                #5 is the status code for In Progress (should find a more readable way to do this)
+        $sql->bindValue(':user', $user->getID());
+        $sql->bindValue(':title', $title);
+        $sql->bindValue(':description', $description);
+        $sql->bindValue(':consultant', 7);
+        $sql->bindValue(':manager', 8);
+        $sql->execute();
+        return new Ticket(Ticket::$db->lastInsertID());
+    }
+
     /**
      * Converts the Ticket into JSON, for use with the API.
      *

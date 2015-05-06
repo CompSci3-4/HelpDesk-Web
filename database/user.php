@@ -10,6 +10,8 @@ class User implements JsonSerializable {
     private static $db = null;
     private static $config = null;
     private $id;
+    private $username;
+    private $hash;
     private $first;
     private $last;
     private $email;
@@ -28,17 +30,28 @@ class User implements JsonSerializable {
         $this->id = $id;
         $query = User::$db->prepare(
                  'SELECT first, last,
-                  email, room, position
+                  email, room, position,
+                  username, hash
                   FROM users
                   WHERE users.id = :id');
         $query->bindValue(':id', $this->id);
         $query->execute();
         $results = $query->fetch();
+        $this->username = $results['username'];
+        $this->hash = $results['hash'];
         $this->first = $results['first'];
         $this->last = $results['last'];
         $this->email = $results['email'];
         $this->room = $results['room'];
         $this->position = $results['position'];
+    }
+
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function passwordMatches($password) {
+        return ($this->hash === crypt($password, $this->hash));
     }
 
     /**
