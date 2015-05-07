@@ -28,7 +28,7 @@
             echo json_encode(['error' => 'InvalidTicketID']);
             die();
         }
-        if($user == $ticket->getUser() or $user->getPosition() > Position::User) {
+        if($user == $ticket->getUser() or $user->getPositionID() > Position::User) {
             echo json_encode($ticket);
         }
         else {
@@ -56,8 +56,19 @@
         echo json_encode(['error' => 'NotImplementedYet']);
     }
     else if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-        http_response_code(501);
-        echo json_encode(['error' => 'NotImplementedYet']);
+        if(!isset($_GET['id'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingTicketID']);
+            die();
+        }
+        if($user->getPositionID() < Position::Admin) {
+            http_response_code(403);
+            echo json_encode(['error' => 'NoDeletionRight']);
+            die();
+        }
+        $ticket = new Ticket($_GET['id']);
+        echo json_encode($ticket);
+        $ticket->delete();
     }
     else {
         http_response_code(405);

@@ -69,6 +69,12 @@ class Ticket implements JsonSerializable {
         return new Ticket(Ticket::$db->lastInsertID());
     }
 
+    public function delete() {
+        $sql = Ticket::$db->prepare('DELETE FROM tickets WHERE id = :id');
+        $sql->bindValue(':id', $this->id);
+        $sql->execute();
+    }
+
     /**
      * Converts the Ticket into JSON, for use with the API.
      *
