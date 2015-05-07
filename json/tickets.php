@@ -4,12 +4,12 @@
     require_once("../database/position.php");
     session_name('HelpdeskID');
     session_start();
-    if(!isset($_SESSION['id'])) {
+    if(!isset($_SESSION['username'])) {
         http_response_code(403);
         echo json_encode(['error' => 'InvalidSessionCookie']);
         die();
     }
-    $user = new User($_SESSION['id']);
+    $user = new User($_SESSION['username']);
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
         if(!isset($_GET['id'])) {
             $personal = $user->getTickets();

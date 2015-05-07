@@ -26,17 +26,28 @@ class User implements JsonSerializable {
      *
      * @param int $id the ID of the user to be retrieved.
      */
-    public function __construct($id) {
-        $this->id = $id;
-        $query = User::$db->prepare(
-                 'SELECT first, last,
+    public function __construct($idOrUsername) {
+        if(is_numeric($idOrUsername)) {
+            $query = User::$db->prepare(
+                 'SELECT id, first, last,
                   email, room, position,
                   username, hash
                   FROM users
                   WHERE users.id = :id');
-        $query->bindValue(':id', $this->id);
+            $query->bindValue(':id', $idOrUsername);
+        }
+        else {
+            $query = User::$db->prepare(
+                 'SELECT id, first, last,
+                  email, room, position,
+                  username, hash
+                  FROM users
+                  WHERE users.username = :name');
+            $query->bindValue(':name', $idOrUsername);
+        }
         $query->execute();
         $results = $query->fetch();
+        $this->id = $results['id'];
         $this->username = $results['username'];
         $this->hash = $results['hash'];
         $this->first = $results['first'];
