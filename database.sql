@@ -156,7 +156,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'tom','garcia',4,'',0,'$1$2L8uEAqe$9DuaxPzu8z3Miq9KLa73h0','tgarcia'),(6,'john','doe',1,'johndoe@example.com',101,'$1$io922r6p$6a/X.EFMxURoEZft5ypUW.','jdoe'),(7,'Consultant','Charles',2,'charles@example.com',200,'$1$sWNwMnuL$S1N.RuXVulrpQxheCSWOY/','charles'),(8,'Manager','Moe',3,'charles@example.com',200,'$1$SYp5UJzX$wRaKexwCHlx9.mBU7XcSc/','moe');
+INSERT INTO `users` VALUES (5,'tom','garcia',4,'',0,'$2y$07$DARJKF7Ep6B0J4mHxCHlsOyWl7olbbbtINs2Fm3zvmCHM6TcI3l3m','tgarcia'),(6,'john','doe',1,'johndoe@example.com',101,'$2y$07$89eTTt8d7VKd3TCnvBLt4utX3CESra7Bv4PapTFgd7Oak0vzLcxD6','jdoe'),(7,'Consultant','Charles',2,'charles@example.com',200,'$2y$07$5qf7DNJJhd7f3oBHyG8dweSLjoKybHMP3/RVjdODCO7J.KTIeAkIe','charles'),(8,'Manager','Moe',3,'charles@example.com',200,'$2y$07$JZhXg8EDNA8Q7PkA3toMmuDnOt61q62ultOOq2gUZ8DrR.aK3pG7y','moe');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -169,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-05 22:37:14
+-- Dump completed on 2015-05-06 21:07:23
