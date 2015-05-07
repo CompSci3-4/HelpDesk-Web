@@ -5,6 +5,7 @@
     $password = $_GET['password'];
     $user = new User($id);
     if($user->passwordMatches($password)) {
+        session_name('HelpdeskID');
         session_start();
         $_SESSION['id'] = $id;
     }

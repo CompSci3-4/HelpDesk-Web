@@ -2,6 +2,7 @@
     require_once("../database/ticket.php");
     require_once("../database/user.php");
     require_once("../database/position.php");
+    session_name('HelpdeskID');
     session_start();
     if(!isset($_SESSION['id'])) {
         http_response_code(403);

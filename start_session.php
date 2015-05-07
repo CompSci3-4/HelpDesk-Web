@@ -1,5 +1,6 @@
 <?php
     include("globals.php");
+    session_name('HelpdeskID');
     session_start();
     if(isset($_GET['user']))
         $_SESSION['id'] = $_GET['user'];
