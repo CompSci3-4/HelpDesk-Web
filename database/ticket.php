@@ -1,7 +1,7 @@
 <?php
-require_once("../globals.php");
-require_once("user.php");
-require_once("status.php");
+require_once(dirname(dirname(__FILE__)) . "/globals.php");
+require_once(dirname(__FILE__) . "/user.php");
+require_once(dirname(__FILE__) . "/status.php");
 /**
  * A help ticket within the system.
  *

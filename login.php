@@ -1,24 +1,17 @@
 <?php
-    $config = parse_ini_file("server.conf");
-    $db = new PDO("mysql:host={$config['host']};dbname={$config['database']};charset=utf8", "{$config['user']}", "{$config['password']}");
-    $sql = 'SELECT id, first, last
-            FROM users
-	    ';
+    require_once('globals.php');
+    require_once('database/user.php');
+    $username = $_POST['user'];
+    $password = $_POST['password'];
+    $user = new User($username);
+    if($user->passwordMatches($password)) {
+        session_name('HelpdeskID');
+        session_start();
+        $_SESSION['username'] = $username;
+        $_SESSION['id'] = $username;
+        header('Location: ' . $config['root_directory'] . '/tickets/list.php', TRUE, 302);
+    }
+    else {
+        header('Location: ' . $config['root_directory'] . '/index.html', TRUE, 302);
+    }
 ?>
-<html>
-    <head>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-        <form action="tickets/list.php" method="get"> 
-            <select name="user">
-            <?php foreach($db->query($sql) as $row):
-                $id = $row['id'];
-                $name = $row['first'] . ' ' . $row['last'];
-                echo "<option value='$id'>$name</option>";
-            endforeach;?>
-            </select>
-            <input type="submit" value="Log In"></input>
-        </form>
-    </body>
-</html>

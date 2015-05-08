@@ -1,7 +1,7 @@
 <?php
-require_once("../globals.php");
-require_once("ticket.php");
-require_once("position.php");
+require_once(dirname(dirname(__FILE__)) . "/globals.php");
+require_once(dirname(__FILE__) . "/ticket.php");
+require_once(dirname(__FILE__) . "/position.php");
 /**
  * A user within the system.
  */

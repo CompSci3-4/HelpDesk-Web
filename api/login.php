@@ -1,9 +1,8 @@
 <?php
     require_once('../globals.php');
     require_once('../database/user.php');
-    $username = $_GET['user'];
-    echo $id;
-    $password = $_GET['password'];
+    $username = $_POST['user'];
+    $password = $_POST['password'];
     $user = new User($username);
     if($user->passwordMatches($password)) {
         session_name('HelpdeskID');

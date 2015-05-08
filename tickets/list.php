@@ -1,7 +1,7 @@
 <?php
     require_once("../start_session.php");
     require_once("../database/user.php");
-    $user = new User($_SESSION['id']);
+    $user = new User($_SESSION['username']);
     function createTable($tickets, $userColumn = true, $consultantColumn = true, $managerColumn = true) {
         $str =
         '<table>
