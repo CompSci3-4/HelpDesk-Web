@@ -55,6 +55,16 @@ class Ticket implements JsonSerializable {
         $this->mid = $results['mid'];
     }
 
+    public function setDescription($newDescription) {
+        $this->description = $newDescription;
+        $query = Ticket::$db->prepare('UPDATE tickets
+            SET description = :description
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':description', $newDescription);
+        $query->execute();
+    }
+
     public static function createTicket($title, $description, $user) {
         $sql = Ticket::$db->prepare("INSERT INTO tickets
                 (user, title, consultant, manager, description, status)

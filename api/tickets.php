@@ -5,7 +5,7 @@
     session_name('HelpdeskID');
     session_start();
     if(!isset($_SESSION['username'])) {
-        http_response_code(403);
+        http_response_code(401);
         echo json_encode(['error' => 'InvalidSessionCookie']);
         die();
     }
@@ -52,8 +52,48 @@
         echo json_encode(Ticket::createTicket($title, $description, $user));
     }
     else if($_SERVER['REQUEST_METHOD'] == 'PATCH') {
-        http_response_code(501);
-        echo json_encode(['error' => 'NotImplementedYet']);
+        #Fills $_POST with the content of the request body, because
+        #PHP does not automatically do this for PATCH requests.
+        parse_str(file_get_contents('php://input'), $_POST);
+        if(!isset($_GET['id'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingTicketID']);
+            die();
+        }
+        $ticket = new Ticket($_GET['id']);
+        if(isset($_POST['manager'])) {
+            if($user->getPositionID() >= Position::Admin) {
+                $manager = new User($_POST['manager']);
+                $ticket->setManager($manager);
+            }
+            else {
+                http_response_code(403);
+                echo json_encode(['error' => 'NoPatchRight']);
+                die();
+            }
+        }
+        if(isset($_POST['consultant'])) {
+            if($user->getPositionID() >= Position::Manager) {
+                $consultant = new User($_POST['consultant']);
+                $ticket->setConsultant($consultant);
+            }
+            else {
+                http_response_code(403);
+                echo json_encode(['error' => 'NoPatchRight']);
+                die();
+            }
+        }
+        if(isset($_POST['description'])) {
+            if($user == $ticket->getUser() or $user->getPositionID() > Position::User) {
+                $ticket->setDescription($_POST['description']);
+            }
+            else {
+                http_response_code(403);
+                echo json_encode(['error' => 'NoPatchRight']);
+                die();
+            }
+        }
+        echo json_encode($ticket);
     }
     else if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         if(!isset($_GET['id'])) {
