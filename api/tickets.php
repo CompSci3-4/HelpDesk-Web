@@ -83,6 +83,16 @@
                 die();
             }
         }
+        if(isset($_POST['status'])) {
+            if($user->getPositionID() >= Position::Consultant) {
+                $ticket->setStatus($_POST['status']);
+            }
+            else {
+                http_response_code(403);
+                echo json_encode(['error' => 'NoPatchRight']);
+                die();
+            }
+        }
         if(isset($_POST['description'])) {
             if($user == $ticket->getUser() or $user->getPositionID() > Position::User) {
                 $ticket->setDescription($_POST['description']);
