@@ -1,6 +1,15 @@
 <?php
     require_once('../globals.php');
     require_once('../database/user.php');
+    /**
+     * @api {post} /login.php Login
+     * @apiName Login
+     * @apiGroup Login
+     * @apiParam {String} user the username of the user you want to log in as.
+     * @apiParam {String} password the user's password.
+     * @apiSuccess {Cookie} HelpdeskID Session cookie to be used when accessing the rest of the API.
+     * @apiError {String} IncorrectUserOrPassword Username or password is incorrect and/or not supplied.
+     */
     $username = $_POST['user'];
     $password = $_POST['password'];
     $user = new User($username);
