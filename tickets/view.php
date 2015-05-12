@@ -6,10 +6,10 @@
     $managerDropdown = '<button id="showManager">edit</button><form class="hidden-form" id="setManager"><select id="manager">';
     $statusDropdown = '<button id="showStatus">edit</button><form class="hidden-form" id="setStatus"><select id="status">';
     foreach(User::allConsultants() as $consultant) {
-        $consultantDropdown .= "<option value = {$consultant->getID()}>{$consultant->getName()}</option>";
+        $consultantDropdown .= "<option value = {$consultant->getUsername()}>{$consultant->getName()}</option>";
     }
     foreach(User::allManagers() as $manager) {
-        $managerDropdown .= "<option value = {$manager->getID()}>{$manager->getName()}</option>";
+        $managerDropdown .= "<option value = {$manager->getUsername()}>{$manager->getName()}</option>";
     }
     foreach(Status::allStatuses() as $status) {
         $name = Status::toString($status);
@@ -32,8 +32,8 @@
         $("#setStatus").submit(function () {
            var status = $("#status").val(); 
            var ticket = <?php echo $_GET['id'];?>;
-           var url = "<?php echo $config['root_directory'] . '/tickets/setStatus.json'?>";
-           $.post(url, {"ticketID": ticket, "statusID": status});
+           var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
+           $.ajax(url, {method: 'PATCH', data: {"status": status}});
            $("#statusName").html($("#status :selected").text());
            $("#setStatus").hide();
             $("#showStatus").show();
@@ -46,8 +46,8 @@
         $("#setConsultant").submit(function () {
            var consultant = $("#consultant").val(); 
            var ticket = <?php echo $_GET['id'];?>;
-           var url = "<?php echo $config['root_directory'] . '/tickets/setConsultant.json'?>";
-           $.post(url, {"ticketID": ticket, "consultantID": consultant});
+           var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
+           $.ajax(url, {method: 'PATCH', data: {"consultant": consultant}});
            $("#consultantName").html($("#consultant :selected").text());
            $("#setConsultant").hide();
             $("#showConsultant").show();
@@ -60,8 +60,8 @@
         $("#setManager").submit(function () {
            var manager = $("#manager").val(); 
            var ticket = <?php echo $_GET['id'];?>;
-           var url = "<?php echo $config['root_directory'] . '/tickets/setManager.json'?>";
-           $.post(url, {"ticketID": ticket, "managerID": manager});
+           var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
+           $.ajax(url, {method: 'PATCH', data: {"manager": manager}});
            $("#managerName").html($("#manager :selected").text());
            $("#setManager").hide();
             $("#showManager").show();
