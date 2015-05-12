@@ -1,5 +1,0 @@
-<?php
-    require_once("../database/user.php");
-    $user = new User($_GET['id']);
-    echo json_encode($user);
-?>
