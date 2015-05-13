@@ -98,9 +98,9 @@ class Ticket implements JsonSerializable {
             'description' => $this->description,
             'status' => Status::toString($this->status),
             'date' => $this->date,
-            'user' => $this->getUser()->getJSON(),
-            'consultant' => $this->getConsultant()->getJSON(),
-            'manager' => $this->getManager()->getJSON(),
+            'user' => $this->getUser(),
+            'consultant' => $this->getConsultant(),
+            'manager' => $this->getManager(),
         );
     }
 

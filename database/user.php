@@ -71,28 +71,13 @@ class User implements JsonSerializable {
      * @return string the JSON representation of the user.
      */
     public function jsonSerialize() {
-        $config = User::$config;
-        $tickets = array();
-        foreach($this->getTickets() as $ticket)
-            array_push($tickets, $ticket->getJSON());
-        $consultantTickets = array();
-        foreach($this->getConsultantTickets() as $ticket)
-            array_push($consultantTickets, $ticket->getJSON());
-        $managerTickets = array();
-        foreach($this->getManagerTickets() as $ticket)
-            array_push($managerTickets, $ticket->getJSON());
-        $tickets = array(
-            'personal' => $tickets,
-            'consultant for' => $consultantTickets,
-            'manager for' => $managerTickets);
         return array(
-            'id' => $this->id,
+            'username' => $this->username,
             'first' => $this->first,
             'last' => $this->last,
             'email' => $this->email,
             'room' => $this->room,
             'position' => Position::toString($this->position),
-            'tickets' => $tickets
         );
     }
 
@@ -138,6 +123,13 @@ class User implements JsonSerializable {
      */
     public static function allManagers() {
         return User::listUsers(Position::Manager);
+    }
+
+    /**
+     * @return array a list of all admins in the database.
+     */
+    public static function allAdmins() {
+        return User::listUsers(Position::Admin);
     }
 
     /**

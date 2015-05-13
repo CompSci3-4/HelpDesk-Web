@@ -195,21 +195,21 @@
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "user",
-            "description": "<p>the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who created the ticket. Check the User API for listing of fields.</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "consultant",
-            "description": "<p>the user who consults for the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who consults for the ticket. Check the User API for listing of fields.</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "manager",
-            "description": "<p>the user who manages the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who manages the ticket. Check the User API for listing of fields.</p> "
           }
         ]
       }
@@ -532,5 +532,160 @@
     "version": "0.0.0",
     "filename": "api/tickets.php",
     "groupTitle": "Tickets"
+  },
+  {
+    "type": "get",
+    "url": "/users.php?username=:username",
+    "title": "Get User",
+    "name": "GetUser",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "username",
+            "description": "<p>the user's username.</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "username",
+            "description": "<p>the user's username.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "first",
+            "description": "<p>the user's first name.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "last",
+            "description": "<p>the user's last name.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "email",
+            "description": "<p>the user's email.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "position",
+            "description": "<p>the user's position (e.g. User, Admin, Consultant).</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "room",
+            "description": "<p>the user's room number.</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidSessionCookie",
+            "description": "<p>Session cookie either does not exist or is expired.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "NoAccessRight",
+            "description": "<p>User is not allowed to view requested User (only staff are allowed to view normal users).</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/users.php",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "get",
+    "url": "/users.php",
+    "title": "List Users",
+    "name": "GetUsers",
+    "group": "Users",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "users",
+            "description": "<p>all Users in the database.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "consultants",
+            "description": "<p>all consultants in the database.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "managers",
+            "description": "<p>all managers in the database.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "admins",
+            "description": "<p>all admins in the database.</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidSessionCookie",
+            "description": "<p>Session cookie either does not exist or is expired.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "NoAccessRight",
+            "description": "<p>User does not have permission to view all users (only staff may view all users).</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/users.php",
+    "groupTitle": "Users"
   }
 ]

@@ -38,9 +38,9 @@
          * @apiSuccess {String} title the Ticket's title.
          * @apiSuccess {String} description the Ticket's description.
          * @apiSuccess {String} date the date the Ticket was created.
-         * @apiSuccess {Object} user the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.
-         * @apiSuccess {Object} consultant the user who consults for the ticket. WARNING: User API is not finished yet, so this field should be ignored.
-         * @apiSuccess {Object} manager the user who manages the ticket. WARNING: User API is not finished yet, so this field should be ignored.
+         * @apiSuccess {Object} user the user who created the ticket. Check the User API for listing of fields.
+         * @apiSuccess {Object} consultant the user who consults for the ticket. Check the User API for listing of fields.
+         * @apiSuccess {Object} manager the user who manages the ticket. Check the User API for listing of fields.
          * @apiError {String} InvalidSessionCookie Session cookie either does not exist or is expired.
          * @apiError {String} InvalidTicketID Ticket does not exist.
          * @apiError {String} NoAccessRight User is not allowed to access requested ticket.
