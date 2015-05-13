@@ -1,7 +1,30 @@
-body {
-    background-color: lightblue;
+h1 {
+    background-color:black;
+    color:white;
+	Font
+    padding:5px;
+}
+h2{
+color:blue;
+font-size:20px
 }
 
+body {
+    background-color: #00FA9A;
+}
+table, th, td {
+   border: 1px solid black;
+} 
+table {
+    border-collapse: semi-expanded;
+	width: 100%;
+}
+
+th {
+    height: 50px;
+	background-color: lime;
+    color: red;
+} 
 form * {
     display: block;
     width: 200px;
