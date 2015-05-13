@@ -1,15 +1,16 @@
 h1 {
     background-color:black;
     color:white;
+	Font
     padding:5px;
 }
 h2{
 color:blue;
-font-size:100px
+font-size:20px
 }
 
 body {
-    background-color: lime-green;
+    background-color: #00FA9A;
 }
 table, th, td {
    border: 1px solid black;
