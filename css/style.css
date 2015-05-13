@@ -1,11 +1,15 @@
-header {
+h1 {
     background-color:black;
     color:white;
-    text-align:center;
     padding:5px;
 }
+h2{
+color:blue;
+font-size:200px
+}
+
 body {
-    background-color: lightblue;
+    background-color: red;
 }
 table, th, td {
    border: 1px solid green;
