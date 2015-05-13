@@ -1,7 +1,25 @@
+header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
 body {
     background-color: lightblue;
 }
+table, th, td {
+   border: 1px solid green;
+} 
+table {
+    border-collapse: semi-expanded;
+	width: 100%;
+}
 
+th {
+    height: 50px;
+	background-color: lime;
+    color: red;
+} 
 form * {
     display: block;
     width: 200px;
