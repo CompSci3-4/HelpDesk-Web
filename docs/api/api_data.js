@@ -1,5 +1,188 @@
 define({ "api": [
   {
+    "type": "get",
+    "url": "/account.php",
+    "title": "Account Info",
+    "name": "GetAccount",
+    "group": "Account",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "username",
+            "description": "<p>the user's username.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "first",
+            "description": "<p>the user's first name.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "last",
+            "description": "<p>the user's last name.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "email",
+            "description": "<p>the user's email.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "position",
+            "description": "<p>the user's position (e.g. User, Admin, Consultant).</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "room",
+            "description": "<p>the user's room number.</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidSessionCookie",
+            "description": "<p>Session cookie either does not exist or is expired.</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/account.php",
+    "groupTitle": "Account"
+  },
+  {
+    "type": "patch",
+    "url": "/account.php",
+    "title": "Edit Account Info",
+    "name": "PatchAccount",
+    "group": "Account",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "first",
+            "description": "<p>the user's new first name.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "last",
+            "description": "<p>the user's new last name.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "email",
+            "description": "<p>the user's new email.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "password",
+            "description": "<p>the user's new password.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "room",
+            "description": "<p>the user's new room number.</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "username",
+            "description": "<p>the user's username.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "first",
+            "description": "<p>the user's first name.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "last",
+            "description": "<p>the user's last name.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "email",
+            "description": "<p>the user's email.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "position",
+            "description": "<p>the user's position (e.g. User, Admin, Consultant).</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "room",
+            "description": "<p>the user's room number.</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidSessionCookie",
+            "description": "<p>Session cookie either does not exist or is expired.</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/account.php",
+    "groupTitle": "Account"
+  },
+  {
     "type": "post",
     "url": "/login.php",
     "title": "Login",
@@ -54,6 +237,188 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "api/login.php",
     "groupTitle": "Login"
+  },
+  {
+    "type": "get",
+    "url": "/tickets.php?id=:id",
+    "title": "Get Ticket",
+    "name": "GetMessage",
+    "group": "Message",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>the Message's ID number.</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>the Message's ID number.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "title",
+            "description": "<p>the Message's title.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "description",
+            "description": "<p>the Message's description.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "date",
+            "description": "<p>the date the Message was created.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "user",
+            "description": "<p>the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidSessionCookie",
+            "description": "<p>Session cookie either does not exist or is expired.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidMessageID",
+            "description": "<p>Message does not exist.</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/message.php",
+    "groupTitle": "Message"
+  },
+  {
+    "type": "post",
+    "url": "/tickets.php?id=:id",
+    "title": "Create a Ticket",
+    "name": "PostMessage",
+    "group": "Message",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Title of the new Message.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Description of the Message.</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>the Message's ID number.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "title",
+            "description": "<p>the Message's title.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "description",
+            "description": "<p>the Message's description.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "date",
+            "description": "<p>the date the Message was created.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "ticket",
+            "description": "<p>id of the ticket</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidMessageID",
+            "description": "<p>Message does not exist.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingTitle",
+            "description": "<p>title parameter not supplied.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingDescription",
+            "description": "<p>description parameter not supplied.</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/message.php",
+    "groupTitle": "Message"
   },
   {
     "type": "delete",
@@ -138,6 +503,42 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "api/tickets.php",
+    "groupTitle": "Tickets"
+  },
+  {
+    "type": "get",
+    "url": "/message.php",
+    "title": "List Tickets",
+    "name": "GetMessage",
+    "group": "Tickets",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "messages",
+            "description": "<p>for that user</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidSessionCookie",
+            "description": "<p>Session cookie either does not exist or is expired.</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/message.php",
     "groupTitle": "Tickets"
   },
   {

@@ -56,6 +56,26 @@
             'managers' => User::AllManagers(), 'admins' => User::AllAdmins()];
         echo json_encode($users);
     }
+    else if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if(!isset($_POST['username'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingUsername']);
+            die();
+        }
+        if(!isset($_POST['first'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingFirstName']);
+            die();
+        }
+        if(!isset($_POST['last'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingLastName']);
+            die();
+        }
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        echo json_encode(Ticket::createTicket($title, $description, $user));
+    }
     else {
         http_response_code(405);
         echo json_encode(['error' => 'UnsupportedRequestMethod']);

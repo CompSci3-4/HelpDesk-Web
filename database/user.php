@@ -65,6 +65,22 @@ class User implements JsonSerializable {
         return ($this->hash === crypt($password, $this->hash));
     }
 
+    public function setPassword($newPassword) {
+        $salt = '$2y$07$';
+        $chars = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
+        for($i = 0; $i < 22; $i++) {
+            $salt .= $chars[array_rand($chars)];
+        }
+        $hash = crypt($newPassword, $salt);
+        $this->hash = $hash;
+        $query = User::$db->prepare('UPDATE users
+            SET hash = :hash
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':hash', $hash);
+        $query->execute();
+    }
+
     /**
      * Converts the User into JSON, for use with the API.
      *
@@ -161,11 +177,31 @@ class User implements JsonSerializable {
         return $this->first;
     }
 
+    public function setFirst($newFirst) {
+        $this->first = $newFirst;
+        $query = User::$db->prepare('UPDATE users
+            SET first = :first
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':first', $newFirst);
+        $query->execute();
+    }
+
     /**
      * @return string the user's last name.
      */
     public function getLast() {
         return $this->last;
+    }
+
+    public function setLast($newLast) {
+        $this->last = $newLast;
+        $query = User::$db->prepare('UPDATE users
+            SET last = :last
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':last', $newLast);
+        $query->execute();
     }
 
     /**
@@ -182,11 +218,31 @@ class User implements JsonSerializable {
         return $this->room;
     }
 
+    public function setRoom($newRoom) {
+        $this->room = $newRoom;
+        $query = User::$db->prepare('UPDATE users
+            SET room = :room
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':room', $newRoom);
+        $query->execute();
+    }
+
     /**
      * @return string the user's email address.
      */
     public function getEmail() {
         return $this->email;
+    }
+
+    public function setEmail($newEmail) {
+        $this->email = $newEmail;
+        $query = User::$db->prepare('UPDATE users
+            SET email = :email
+            WHERE id = :id');
+        $query->bindValue(':id', $this->id);
+        $query->bindValue(':email', $newEmail);
+        $query->execute();
     }
 
     /**
