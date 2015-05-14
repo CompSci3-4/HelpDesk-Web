@@ -1,1 +1,10 @@
-text-align: center;
+body {
+    background-color: #6495ED;
+    text-align: center;
+}
+form * {
+    display: block;
+    width: 200px;
+    margin: 10px;
+}
+
