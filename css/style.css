@@ -1,12 +1,12 @@
 h1 {
-    background-color:black;
-    color:white;
-	Font
+    color:black
     padding:5px;
+	
 }
 h2{
 color:blue;
 font-size:20px
+background-image: url(http://www.ljhs.sandi.net/faculty/volger/volger.jpg)
 }
 
 body {
