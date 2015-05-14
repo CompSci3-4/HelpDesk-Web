@@ -57,6 +57,23 @@ class User implements JsonSerializable {
         $this->position = $results['position'];
     }
 
+    public static function createUser($username, $password, $first, $last, $email, $room) {
+        $query = User::$db->prepare('INSERT INTO users 
+            (username, first, last, email, room, position)
+            VALUES (:username, :first, :last, :email, :room, :position)');
+        $query->bindValue(':username', $username);
+        $query->bindValue(':first', $first);
+        $query->bindValue(':last', $last);
+        $query->bindValue(':email', $email);
+        $query->bindValue(':room', $room);
+        echo Position::User;
+        $query->bindValue(':position', Position::User);
+        $query->execute();
+        $newUser = new User(User::$db->lastInsertID());
+        $newUser->setPassword($password);
+        return $newUser;
+    }
+
     public function getUsername() {
         return $this->username;
     }

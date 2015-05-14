@@ -1,6 +1,49 @@
 <?php
     require_once("../database/user.php");
     require_once("../database/position.php");
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if(!isset($_POST['username'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingUsername']);
+            die();
+        }
+        if(!isset($_POST['first'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingFirstName']);
+            die();
+        }
+        if(!isset($_POST['last'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingLastName']);
+            die();
+        }
+        if(!isset($_POST['password'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingPassword']);
+            die();
+        }
+        if(!isset($_POST['email'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingEmail']);
+            die();
+        }
+        if(!isset($_POST['room'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'MissingRoom']);
+            die();
+        }
+        $username = $_POST['username'];
+        $first = $_POST['first'];
+        $last = $_POST['last'];
+        $password = $_POST['password'];
+        $email = $_POST['email'];
+        $room = $_POST['room'];
+        $newUser = User::createUser($username, $password, $first, $last, $email, $room);
+        session_name('HelpdeskID');
+        session_start();
+        $_SESSION['username'] = $newUser->getUsername();
+        die();
+    }
     session_name('HelpdeskID');
     session_start();
     if(!isset($_SESSION['username'])) {
@@ -55,26 +98,6 @@
         $users = ['users' => User::allUsers(), 'consultants' => User::AllConsultants(),
             'managers' => User::AllManagers(), 'admins' => User::AllAdmins()];
         echo json_encode($users);
-    }
-    else if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if(!isset($_POST['username'])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'MissingUsername']);
-            die();
-        }
-        if(!isset($_POST['first'])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'MissingFirstName']);
-            die();
-        }
-        if(!isset($_POST['last'])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'MissingLastName']);
-            die();
-        }
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        echo json_encode(Ticket::createTicket($title, $description, $user));
     }
     else {
         http_response_code(405);
