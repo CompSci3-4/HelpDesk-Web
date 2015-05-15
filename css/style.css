@@ -9,7 +9,9 @@ font-size:20px
 }
 
 body {
-    background-color: #00FA9A;
+	font-family: 'Ubuntu', 'Droid Sans';
+        font-size: 48px;
+    	background-color: #00FA9A;
 }
 table, th, td {
    border: 1px solid black;
@@ -21,7 +23,7 @@ table {
 
 th {
     height: 50px;
-	background-color: lime;
+	background-color: #00FA9A;
     color: red;
 } 
 form * {
