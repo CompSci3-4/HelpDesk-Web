@@ -1,6 +1,30 @@
 <?php
     require_once("../database/user.php");
     require_once("../database/position.php");
+    /**
+     * @api {post} /users.php Create User
+     * @apiName PostUser
+     * @apiGroup Users
+     * @apiParam {String} username the user's username. Must be unique.
+     * @apiParam {String} first the user's first name.
+     * @apiParam {String} last the user's last name.
+     * @apiParam {String} email the user's email.
+     * @apiParam {String} password the user's password.
+     * @apiParam {Number} room the user's room number.
+     * @apiSuccess {String} username the user's username.
+     * @apiSuccess {String} first the user's first name.
+     * @apiSuccess {String} last the user's last name.
+     * @apiSuccess {String} email the user's email.
+     * @apiSuccess {String} position the user's position (e.g. User, Admin, Consultant).
+     * @apiSuccess {Number} room the user's room number.
+     * @apiError {String} MissingUsername Username parameter was not supplied.
+     * @apiError {String} MissingFirstName first  parameter was not supplied.
+     * @apiError {String} MissingLastName last parameter was not supplied.
+     * @apiError {String} MissingPassword password parameter was not supplied.
+     * @apiError {String} MissingEmail email parameter was not supplied.
+     * @apiError {String} MissingRoom room was not supplied.
+     * @apiError {String} DuplicateUsername a user already exists with that username.
+     */
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(!isset($_POST['username'])) {
             http_response_code(400);

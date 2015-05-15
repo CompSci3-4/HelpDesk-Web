@@ -1088,5 +1088,166 @@
     "version": "0.0.0",
     "filename": "api/users.php",
     "groupTitle": "Users"
+  },
+  {
+    "type": "post",
+    "url": "/users.php",
+    "title": "Create User",
+    "name": "PostUser",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "username",
+            "description": "<p>the user's username. Must be unique.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "first",
+            "description": "<p>the user's first name.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "last",
+            "description": "<p>the user's last name.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "email",
+            "description": "<p>the user's email.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "password",
+            "description": "<p>the user's password.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "room",
+            "description": "<p>the user's room number.</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "username",
+            "description": "<p>the user's username.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "first",
+            "description": "<p>the user's first name.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "last",
+            "description": "<p>the user's last name.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "email",
+            "description": "<p>the user's email.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "position",
+            "description": "<p>the user's position (e.g. User, Admin, Consultant).</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "room",
+            "description": "<p>the user's room number.</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingUsername",
+            "description": "<p>Username parameter was not supplied.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingFirstName",
+            "description": "<p>first  parameter was not supplied.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingLastName",
+            "description": "<p>last parameter was not supplied.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingPassword",
+            "description": "<p>password parameter was not supplied.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingEmail",
+            "description": "<p>email parameter was not supplied.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingRoom",
+            "description": "<p>room was not supplied.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "DuplicateUsername",
+            "description": "<p>a user already exists with that username.</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/users.php",
+    "groupTitle": "Users"
   }
 ]
