@@ -66,9 +66,12 @@ class User implements JsonSerializable {
         $query->bindValue(':last', $last);
         $query->bindValue(':email', $email);
         $query->bindValue(':room', $room);
-        echo Position::User;
         $query->bindValue(':position', Position::User);
         $query->execute();
+        $err = $query->errorInfo();
+        if(isset($err[1]) and $err[1] == 1062) { #1062 is for duplicate entry
+            throw new Exception('DuplicateUsername');
+        }
         $newUser = new User(User::$db->lastInsertID());
         $newUser->setPassword($password);
         return $newUser;

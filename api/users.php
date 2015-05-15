@@ -38,10 +38,17 @@
         $password = $_POST['password'];
         $email = $_POST['email'];
         $room = $_POST['room'];
-        $newUser = User::createUser($username, $password, $first, $last, $email, $room);
+        try {
+            $newUser = User::createUser($username, $password, $first, $last, $email, $room);
+        } catch (Exception $e) {
+            http_response_code(400);
+            echo json_encode(['error' => $e->getMessage()]);
+            die();
+        }
         session_name('HelpdeskID');
         session_start();
         $_SESSION['username'] = $newUser->getUsername();
+        echo json_encode($newUser);
         die();
     }
     session_name('HelpdeskID');
