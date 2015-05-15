@@ -70,11 +70,11 @@ body{
 .login input[type=text]{
 	width: 250px;
 	height: 30px;
-	background-color: #FF4136;
+	background-color: #92211c;
 	border: 1px solid rgba(255,255,255,0.6);
 	border-radius: 2px;
 	color: #fff;
-	font-family: 'Exo', sans-serif;
+	font-family: 'Exo Bold', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
 	padding: 4px;
@@ -83,11 +83,11 @@ body{
 .login input[type=password]{
 	width: 250px;
 	height: 30px;
-	background-color: #FF4136;
+	background-color: #92211c;
 	border: 1px solid rgba(255,255,255,0.6);
 	border-radius: 2px;
 	color: #fff;
-	font-family: 'Exo', sans-serif;
+	font-family: 'Exo Bold', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
 	padding: 4px;
@@ -97,12 +97,12 @@ body{
 .login input[type=button]{
 	width: 260px;
 	height: 35px;
-	background: #fff;
-	border: 1px solid #fff;
+	background-color: #92211c;
+	border: 1px solid #000000;
 	cursor: pointer;
 	border-radius: 2px;
-	color: #a18d6c;
-	font-family: 'Exo', sans-serif;
+	color: #000000;
+	font-family: 'Exo Bold', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
 	padding: 6px;
