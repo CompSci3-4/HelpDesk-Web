@@ -70,7 +70,7 @@ body{
 .login input[type=text]{
 	width: 250px;
 	height: 30px;
-	background: transparent;
+	background-color: #FF4136;
 	border: 1px solid rgba(255,255,255,0.6);
 	border-radius: 2px;
 	color: #fff;
@@ -83,7 +83,7 @@ body{
 .login input[type=password]{
 	width: 250px;
 	height: 30px;
-	background: transparent;
+	background-color: #FF4136;
 	border: 1px solid rgba(255,255,255,0.6);
 	border-radius: 2px;
 	color: #fff;
