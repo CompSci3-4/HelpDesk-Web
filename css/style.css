@@ -1,35 +1,51 @@
+@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
+
 h1 {
-    color:black
-    padding:5px;
+	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
+	font-size: 48px;
+	color:black
+	padding:5px;
 	
 }
 h2{
-color:blue;
-font-size:20px
+	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
+	font-size: 48px;
+	color:blue;
+	font-size:20px
 }
 
 body {
-    background-color: #00FA9A;
+	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
+	font-size: 48px;
+	background-color: #00FA9A;
 }
 table, th, td {
-   border: 1px solid black;
+	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
+	font-size: 48px;
+	border: 1px solid black;
 } 
 table {
-    border-collapse: semi-expanded;
+	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
+	font-size: 48px;
+	border-collapse: semi-expanded;
 	width: 100%;
 }
 
 th {
-    height: 50px;
-	background-color: lime;
-    color: red;
+	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
+	font-size: 48px;
+	height: 50px;
+	background-color: #00FA9A;
+	color: red;
 } 
 form * {
-    display: block;
-    width: 200px;
-    margin: 10px;
+	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
+	font-size: 48px;
+	display: block;
+	width: 200px;
+	margin: 10px;
 }
 
 .hidden-form {
-    display: none;
+	display: none;
 }
