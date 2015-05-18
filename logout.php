@@ -1,4 +1,5 @@
 <?php
+session_name('HelpdeskID');
 session_start();
 session_destroy();
 $config = parse_ini_file("server.conf");
