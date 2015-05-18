@@ -23,51 +23,7 @@
     <head>
         <link rel="stylesheet" href="../css/style.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" >
-    $( document ).ready(function() {
-        $("#showStatus").click(function () {
-            $("#setStatus").show();
-            $("#showStatus").hide();
-        });
-        $("#setStatus").submit(function () {
-           var status = $("#status").val(); 
-           var ticket = <?php echo $_GET['id'];?>;
-           var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
-           $.ajax(url, {method: 'PATCH', data: {"status": status}});
-           $("#statusName").html($("#status :selected").text());
-           $("#setStatus").hide();
-            $("#showStatus").show();
-           return false;
-        });
-        $("#showConsultant").click(function () {
-            $("#setConsultant").show();
-            $("#showConsultant").hide();
-        });
-        $("#setConsultant").submit(function () {
-           var consultant = $("#consultant").val(); 
-           var ticket = <?php echo $_GET['id'];?>;
-           var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
-           $.ajax(url, {method: 'PATCH', data: {"consultant": consultant}});
-           $("#consultantName").html($("#consultant :selected").text());
-           $("#setConsultant").hide();
-            $("#showConsultant").show();
-           return false;
-        });
-        $("#showManager").click(function () {
-            $("#setManager").show();
-            $("#showManager").hide();
-        });
-        $("#setManager").submit(function () {
-           var manager = $("#manager").val(); 
-           var ticket = <?php echo $_GET['id'];?>;
-           var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
-           $.ajax(url, {method: 'PATCH', data: {"manager": manager}});
-           $("#managerName").html($("#manager :selected").text());
-           $("#setManager").hide();
-            $("#showManager").show();
-           return false;
-        })});
-           </script>
+        <script type="text/javascript" src=<?php echo $config['root_directory'] . '/js/editTickets.js'?>></script>
     </head>
     <body>
     <?php include("../header.php") ?>
