@@ -39,6 +39,8 @@ body {
   width: 310px;
   background: white;
   border-radius: 10px;
+  border: 3px solid;
+  border-color: #c4c4c4 #d1d1d1 #d4d4d4;
   text-align: center;
   @include box-shadow(0 0 200px rgba(white, .5), 0 1px 2px rgba(black, .3));
   h1 {
