@@ -1,1 +1,42 @@
+body {
+  font: 13px/20px Exo, Tahoma, Verdana, sans-serif;
+}
+
+.body {
+  height: auto;
+  background-image: url(https://33.media.tumblr.com/212ea4d5439c7eb69da8a420a08d62c0/tumblr_mk9butThi51qgawlzo1_500.gif);
+  background-size: cover;
+  -webkit-filter: blur(10px);
+  z-index: 0;
+}
+.container {
+  margin: 80px auto;
+  width: 400px;
+}
+input {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+input:hover{
+ color:#000000;
+ background-color:#7FFFD4;
+}
+.info{
+  position: relative;
+  margin: auto;
+  padding: 20px 20px 20px;
+  width: 310px;
+  background: white;
+  border-radius: 10px;
+  border: 3px solid;
+  border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  background-color: #b0e0e6;
+}
+h1{
+  text-align: center;
+}
+
 
