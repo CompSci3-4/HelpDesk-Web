@@ -2,6 +2,7 @@
 <!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!-->
+<?php require_once("globals.php"); ?>
 <html lang="en">
 <!--<![endif]-->
 
@@ -29,9 +30,8 @@
           <input type="submit" name="commit" value="Login">
         </p>
       </form>
-      <form action="root_directory + registration.html" method="get">
-        <input type="submit" value="Sign Up" 
-             name="registar" id="sign_up" />
+      <form action="<?php echo $config['root_directory'] . '/registration.html'?>" method="get">
+        <input type="submit" value="Sign Up" id="sign_up" />
     </form>
     </div>
   </section>
