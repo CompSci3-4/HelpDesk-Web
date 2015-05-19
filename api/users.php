@@ -26,32 +26,32 @@
      * @apiError {String} DuplicateUsername a user already exists with that username.
      */
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if(!isset($_POST['username'])) {
+        if(!isset($_POST['username'] or empty(trim($_POST['username'])))) {
             http_response_code(400);
             echo json_encode(['error' => 'MissingUsername']);
             die();
         }
-        if(!isset($_POST['first'])) {
+        if(!isset($_POST['first'] or empty(trim($_POST['first'])))) {
             http_response_code(400);
             echo json_encode(['error' => 'MissingFirstName']);
             die();
         }
-        if(!isset($_POST['last'])) {
+        if(!isset($_POST['last'] or empty(trim($_POST['last'])))) {
             http_response_code(400);
             echo json_encode(['error' => 'MissingLastName']);
             die();
         }
-        if(!isset($_POST['password'])) {
+        if(!isset($_POST['password'] or empty(trim($_POST['password'])))) {
             http_response_code(400);
             echo json_encode(['error' => 'MissingPassword']);
             die();
         }
-        if(!isset($_POST['email'])) {
+        if(!isset($_POST['email'] or empty(trim($_POST['email'])))) {
             http_response_code(400);
             echo json_encode(['error' => 'MissingEmail']);
             die();
         }
-        if(!isset($_POST['room'])) {
+        if(!isset($_POST['room'] or empty(trim($_POST['room'])))) {
             http_response_code(400);
             echo json_encode(['error' => 'MissingRoom']);
             die();
