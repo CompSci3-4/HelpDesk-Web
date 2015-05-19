@@ -1,4 +1,3 @@
-<?php require_once('../globals.php');?>
 $(document).ready(function() {
     $("#showStatus").click(function () {
         $("#setStatus").show();
@@ -8,7 +7,7 @@ $(document).ready(function() {
        var status = $("#status").val(); 
        var search = document.location.search;
        var ticket = search.substring(search.indexOf("=") + 1);
-       var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
+       var url = "../api/tickets.php?id=" + ticket;
        $.ajax(url, {method: 'PATCH', data: {"status": status}});
        $("#statusName").html($("#status :selected").text());
        $("#setStatus").hide();
@@ -23,7 +22,7 @@ $(document).ready(function() {
        var consultant = $("#consultant").val(); 
        var search = document.location.search;
        var ticket = search.substring(search.indexOf("=") + 1);
-       var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
+       var url = "../api/tickets.php?id=" + ticket;
        $.ajax(url, {method: 'PATCH', data: {"consultant": consultant}});
        $("#consultantName").html($("#consultant :selected").text());
        $("#setConsultant").hide();
@@ -38,7 +37,7 @@ $(document).ready(function() {
        var manager = $("#manager").val(); 
        var search = document.location.search;
        var ticket = search.substring(search.indexOf("=") + 1);
-       var url = "<?php echo $config['root_directory'] . '/api/tickets.php?id='?>" + ticket;
+       var url = "../api/tickets.php?id=" + ticket;
        $.ajax(url, {method: 'PATCH', data: {"manager": manager}});
        $("#managerName").html($("#manager :selected").text());
        $("#setManager").hide();

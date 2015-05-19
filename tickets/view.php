@@ -23,7 +23,7 @@
     <head>
         <link rel="stylesheet" href="../css/style.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src=<?php echo $config['root_directory'] . '/js/editTickets.js'?>></script>
+        <script type="text/javascript" src="../js/editTickets.js"></script>
     </head>
     <body>
     <?php include("../header.php") ?>
