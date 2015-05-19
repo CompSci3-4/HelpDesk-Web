@@ -21,7 +21,7 @@ body {
   bottom: -40px;
   width: auto;
   height: auto;
-  background-image: url(https://33.media.tumblr.com/212ea4d5439c7eb69da8a420a08d62c0/tumblr_mk9butThi51qgawlzo1_500.gif);
+  background-image: url(rain.gif);
   background-size: cover;
   -webkit-filter: blur(10px);
   z-index: 0;
@@ -67,14 +67,6 @@ body {
   input[type=password] {
     width: 278px;
   }
-  p.remember_me {
-    float: left;
-    line-height: 31px;
-    label {
-      font-size: 12px;
-      color: #777;
-      cursor: pointer;
-    }
     input {
       position: relative;
       bottom: 1px;
