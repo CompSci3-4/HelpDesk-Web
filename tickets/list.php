@@ -34,7 +34,7 @@
 ?>
 <html>
     <head>
-        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/ticketStyle.css">
     </head>
     <body>
     <?php include("../header.php") ?>
