@@ -71,9 +71,9 @@
      * @apiSuccess {String} title the Ticket's title.
      * @apiSuccess {String} description the Ticket's description.
      * @apiSuccess {String} date the date the Ticket was created.
-     * @apiSuccess {Object} user the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.
-     * @apiSuccess {Object} consultant the user who consults for the ticket. WARNING: User API is not finished yet, so this field should be ignored.
-     * @apiSuccess {Object} manager the user who manages the ticket. WARNING: User API is not finished yet, so this field should be ignored.
+     * @apiSuccess {Object} user the user who created the ticket. 
+     * @apiSuccess {Object} consultant the user who consults for the ticket. 
+     * @apiSuccess {Object} manager the user who manages the ticket. 
      * @apiError {String} InvalidTicketID Ticket does not exist.
      * @apiError {String} MissingTitle title parameter not supplied.
      * @apiError {String} MissingDescription description parameter not supplied.
@@ -106,9 +106,9 @@
      * @apiSuccess {String} title the Ticket's title.
      * @apiSuccess {String} description the Ticket's description.
      * @apiSuccess {String} date the date the Ticket was created.
-     * @apiSuccess {Object} user the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.
-     * @apiSuccess {Object} consultant the user who consults for the ticket. WARNING: User API is not finished yet, so this field should be ignored.
-     * @apiSuccess {Object} manager the user who manages the ticket. WARNING: User API is not finished yet, so this field should be ignored.
+     * @apiSuccess {Object} user the user who created the ticket. 
+     * @apiSuccess {Object} consultant the user who consults for the ticket. 
+     * @apiSuccess {Object} manager the user who manages the ticket. 
      * @apiError {String} MissingTicketID id parameter not supplied.
      * @apiError {String} NoPatchRight User is not allowed to edit requested ticket.
      */
@@ -174,9 +174,9 @@
      * @apiSuccess {String} title the Ticket's title.
      * @apiSuccess {String} description the Ticket's description.
      * @apiSuccess {String} date the date the Ticket was created.
-     * @apiSuccess {Object} user the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.
-     * @apiSuccess {Object} consultant the user who consults for the ticket. WARNING: User API is not finished yet, so this field should be ignored.
-     * @apiSuccess {Object} manager the user who manages the ticket. WARNING: User API is not finished yet, so this field should be ignored.
+     * @apiSuccess {Object} user the user who created the ticket. 
+     * @apiSuccess {Object} consultant the user who consults for the ticket. 
+     * @apiSuccess {Object} manager the user who manages the ticket. 
      * @apiError {String} MissingTicketID id parameter not supplied.
      * @apiError {String} NoDeletionRight User is not allowed to delete requested ticket.
      */

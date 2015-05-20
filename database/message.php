@@ -40,13 +40,13 @@ class Message implements JsonSerializable {
         $this->sender = new User($results['sender']);
         $this->ticket = new Ticket($results['ticket']);
     }
-    public static function createMessage($title, $description, $ticket, $sender) {
+    public static function createMessage($title, $body, $ticket, $sender) {
         $sql = Message::$db->prepare("INSERT INTO messages
-                (title, description, ticket, sender)
-                values (:title, :description, :ticket, :sender)");
+                (title, body, ticket, sender)
+                values (:title, :body, :ticket, :sender)");
         $sql->bindValue(':ticket', $ticket->getID());
         $sql->bindValue(':title', $title);
-        $sql->bindValue(':description', $description);
+        $sql->bindValue(':body', $body);
         $sql->bindValue(':sender', $sender->getUsername());
         $sql->execute();
         return new Message(Message::$db->lastInsertID());
@@ -100,9 +100,9 @@ class Message implements JsonSerializable {
     }
     
     /**
-     * @return string a detailed description of the problem.
+     * @return string a detailed body of the problem.
      */
-    public function getDescription() {
+    public function getBody() {
         return $this->body;
     }
     /**

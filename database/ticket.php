@@ -252,6 +252,9 @@ class Ticket implements JsonSerializable {
         $this->mid = $newManager->getID();
         $this->manager = $newManager;
     }
+
+    public function getMessages() {
+    }
 }
 
 Ticket::init($config, $db);
