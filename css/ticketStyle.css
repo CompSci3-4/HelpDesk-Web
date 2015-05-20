@@ -1,3 +1,4 @@
+
 @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
 
 h1 {
@@ -17,57 +18,6 @@ body {
 	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
 	font-size: 24px;
 	background-color: #F08080;
-}
-table, th, td {
-	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
-	font-size: 24px;
-	border: 1px solid black;
-} 
-table {
-	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
-	font-size: 24px;
-	border-collapse: semi-expanded;
-	width: 100%;
-}
-
-th {
-	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
-	font-size: 24px;
-	height: 50px;
-	background-color: #00FA9A;
-	color: red;
-} 
-form * {
-	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
-	font-size: 24px;
-	display: block;
-	width: 800px;
-	margin: 10px;
-}
-
-.hidden-form {
-	display: none;
-}
-@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
-
-h1 {
-	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
-	font-size: 48px;
-	color:black
-	padding:5px;
-	
-}
-h2{
-	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
-	font-size: 24px;
-	color:blue;
-}
-
-body {
-	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
-	font-size: 24px;
-	background-color: #F08080;
-	text-align: center;
 }
 table, th, td {
 	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
