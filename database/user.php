@@ -121,7 +121,7 @@ class User implements JsonSerializable {
      * @return string the URL to retrieve the JSON version of this user.
      */
     public function getJSON() {
-        return User::$config['root_directory'] . '/users/view.json?id=' . $this->id;
+        return User::$config['root_directory'] . '/api/users.php?username=' . $this->username;
     }
 
     /**

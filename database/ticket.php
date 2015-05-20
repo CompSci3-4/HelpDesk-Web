@@ -117,7 +117,7 @@ class Ticket implements JsonSerializable {
      * @return string the URL to retrieve the JSON version of this ticket.
      */
     public function getJSON() {
-        return Ticket::$config['root_directory'] . '/tickets/view.json?id=' . $this->id;
+        return Ticket::$config['root_directory'] . '/api/tickets.php?id=' . $this->id;
     }
 
     /**

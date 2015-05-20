@@ -1,16 +1,15 @@
 <?php
-
 require_once("../database/ticket.php");
 require_once("../database/message.php");
 require_once("../database/position.php");
 session_name('HelpdeskID');
 session_start();
-if (!isset($_SESSION['ticket'])) {
+if (!isset($_SESSION['username'])) {
     http_response_code(401);
-    echo json_encode(['error' => 'InvalidTicketID']);
+    echo json_encode(['error' => 'InvalidSessionID']);
     die();
 }
-$user = new User($_SESSION['ticket']);
+$user = new User($_SESSION['username']);
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     /**
      * @api {get} /message.php List Tickets

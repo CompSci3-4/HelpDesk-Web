@@ -1,19 +1,20 @@
 <?php
 require_once("../globals.php");
-require_once("Ticket.php");
+require_once("ticket.php");
 require_once("status.php");
 /**
  * A help ticket within the system.
  *
  * This class serves as a wrapper for SQL queries, so that one does not need to understand SQL or databases to manipulate tickets.
  */
-class message implements JsonSerializable {
+class Message implements JsonSerializable {
     private static $db = null;
     private static $config = null;
     private $id;
     private $title;
     private $body;
     private $date;
+    private $sender;
     private $ticket;
     /**
      * Finds a ticket within the database, with the given ID.
@@ -22,32 +23,33 @@ class message implements JsonSerializable {
      */
     public function __construct($id) {
         $this->id = $id;
-        $query = Ticket::$db->prepare(
-                 'SELECT message.title as subj, message.date, message.body,
-                  message.status AS status, message.ticket as the current ticket 
+        $query = Message::$db->prepare(
+                 'SELECT id, title, date, body, sender, ticket
                   FROM messages
-                  WHERE tickets.id = :id');
+                  WHERE id = :id');
         $query->bindValue(':id', $this->id);
         $query->execute();
         $results = $query->fetch();
         if(!$results) {
-            throw new Exception("Invalid Ticket ID");
+            throw new Exception("Invalid Message ID");
         }
-        $this->ticket = $results['ticket'];
+        
         $this->title = $results['title'];
-        $this->body = $results['description'];
         $this->date = $results['date'];
+        $this->body = $results['body'];
+        $this->sender = new User($results['sender']);
+        $this->ticket = new Ticket($results['ticket']);
     }
-    public static function createMessage($title, $description, $ticket) {
-        $sql = Ticket::$db->prepare("INSERT INTO tickets
-                (title, description, status)
-                values (:ticket, :user, :title,:description)");
-                #5 is the status code for In Progress (should find a more readable way to do this)
-        $sql->bindValue(':ticket', $ticket);
+    public static function createMessage($title, $description, $ticket, $sender) {
+        $sql = Message::$db->prepare("INSERT INTO messages
+                (title, description, ticket, sender)
+                values (:title, :description, :ticket, :sender)");
+        $sql->bindValue(':ticket', $ticket->getID());
         $sql->bindValue(':title', $title);
         $sql->bindValue(':description', $description);
+        $sql->bindValue(':sender', $sender->getUsername());
         $sql->execute();
-        return new Ticket(Ticket::$db->lastInsertID());
+        return new Message(Message::$db->lastInsertID());
     }
     /**
      * Converts the Ticket into JSON, for use with the API.
@@ -59,8 +61,9 @@ class message implements JsonSerializable {
         return array(
             'id' => $this->id,
             'title' => $this->title,
-            'description' => $this->body,
-            'date' => $this->date
+            'date' => $this->date,
+            'body' => $this->body,
+            'sender' => $this->sender
         );
     }
     /**
@@ -68,20 +71,20 @@ class message implements JsonSerializable {
      * @param PDO $db The database to read tickets from.
      */
     public static function init($config, $db) {
-        message::$config = $config;
-        message::$db = $db;
+        Message::$config = $config;
+        Message::$db = $db;
     }
     /**
      * @return string the URL to retrieve the JSON version of this ticket.
      */
     public function getJSON() {
-        return message::$config['root_directory'] . '/tickets/view.json?id=' . $this->id;
+        return Message::$config['root_directory'] . '/api/messages.php?id=' . $this->id;
     }
     /**
      * @return string the URL to retrieve the HTML representation of the ticket.
      */
     public function getHTML() {
-        return message::$config['root_directory'] . '/tickets/view.php?id=' . $this->id;
+        return Message::$config['root_directory'] . '/messages/view.php?id=' . $this->id;
     }
     /**
      * @return int the ticket's id number.
@@ -112,6 +115,9 @@ class message implements JsonSerializable {
     public function getTicket() {
         return $this->ticket;
     }
+    public function getSender() {
+        return $this->sender;
+    }
 }
-message::init($config, $db);
+Message::init($config, $db);
 ?>
