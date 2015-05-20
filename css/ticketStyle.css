@@ -67,6 +67,7 @@ body {
 	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
 	font-size: 24px;
 	background-color: #F08080;
+	text-align: center;
 }
 table, th, td {
 	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
@@ -78,6 +79,7 @@ table {
 	font-size: 24px;
 	border-collapse: semi-expanded;
 	width: 100%;
+	
 }
 
 th {
@@ -86,6 +88,7 @@ th {
 	height: 50px;
 	background-color: #00FA9A;
 	color: red;
+	
 } 
 form * {
 	font-family: 'Exo', 'Ubuntu', 'Droid Sans';
@@ -93,7 +96,6 @@ form * {
 	display: block;
 	width: 800px;
 	margin: 10px;
-	text-align: center;
 }
 
 .hidden-form {
