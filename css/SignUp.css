@@ -21,6 +21,25 @@ input:hover{
  color:#000000;
  background-color:#7FFFD4;
 }
+input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    vertical-align:middle;
+    margin-left:70px
+}
+
+label {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    float: left;
+    padding-top: 5px;
+    text-align: center;
+    width: 300px;
+}
 .info{
   position: relative;
   margin: auto;
@@ -38,7 +57,11 @@ input:hover{
 h1{
   text-align: center;
 }
-
+p
+{
+  text-align: center;
+  width: 250px;
+}
 
 
 
