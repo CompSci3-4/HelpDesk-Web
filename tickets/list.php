@@ -25,6 +25,7 @@
                 $str .= "<td><a href={$ticket->getConsultant()->getHTML()}>{$ticket->getConsultant()->getName()}</a></td>";
             if($managerColumn)
                 $str .= "<td><a href={$ticket->getManager()->getHTML()}>{$ticket->getManager()->getName()}</a></td>";
+            date_default_timezone_set("America/Los_Angeles");
             $date = date('M j', strtotime($ticket->getDate()));
             $str .= "<td>{$ticket->getStatus()}</td>
                 <td>{$date}</td>
