@@ -1,5 +1,4 @@
 <?php
-#TODO add check for invalid ticket id
 require_once("../database/ticket.php");
 require_once("../database/message.php");
 require_once("../database/position.php");
@@ -19,9 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
      * @apiSuccess {Object[]} A list of messages associated with the ticket.
      * @apiError {String} InvalidSessionCookie Session cookie either does not exist or is expired.
      * @apiError {String} NoAccessRight User not allowed to see messages associated with given ticket.
+     * @apiError {String} InvalidTicketID The ticket ID provided does not exist.
      */
     if (isset($_GET['ticket'])) {
+        try {
         $ticket = new Ticket($_GET['ticket']);
+        } 
+        catch(Exception $e) {
+            echo json_encode(['error' => 'InvalidTicketID']);
+            die();
+        }
         if ($user == $ticket->getUser() or $user->getPositionID() > Position::User) {
             echo json_encode($ticket->getMessages());
             die();
@@ -82,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
  * @apiError {String} MissingTicketID TicketID was not provided.
  * @apiError {String} MissingTitle title parameter not supplied.
  * @apiError {String} MissingBody body parameter not supplied.
+ * @apiError {String} InvalidTicketID The ticket ID provided does not exist.
  */ 
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_GET['ticket'])){
@@ -89,7 +96,13 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode(['error' => 'MissingTicketID']);
         die();
     }
-    $ticket = new Ticket($_GET['ticket']);
+    try {
+        $ticket = new Ticket($_GET['ticket']);
+    } 
+    catch(Exception $e) {
+            echo json_encode(['error' => 'InvalidTicketID']);
+            die();
+    }
     if ($user != $ticket->getUser() and $user->getPositionID() == Position::User) {
         http_response_code(403);
         echo json_encode(['error' => 'NoAccessRight']);

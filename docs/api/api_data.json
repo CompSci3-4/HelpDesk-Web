@@ -240,10 +240,10 @@
   },
   {
     "type": "get",
-    "url": "/tickets.php?id=:id",
-    "title": "Get Ticket",
+    "url": "/messages.php?id=:id",
+    "title": "Get Message",
     "name": "GetMessage",
-    "group": "Message",
+    "group": "Messages",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -278,8 +278,8 @@
             "group": "Success 200",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "description",
-            "description": "<p>the Message's description.</p> "
+            "field": "body",
+            "description": "<p>the Message's body.</p> "
           },
           {
             "group": "Success 200",
@@ -292,8 +292,8 @@
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
-            "field": "user",
-            "description": "<p>the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "field": "sender",
+            "description": "<p>the user who sent the message.</p> "
           }
         ]
       }
@@ -314,20 +314,84 @@
             "optional": false,
             "field": "InvalidMessageID",
             "description": "<p>Message does not exist.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "MissingMessageID",
+            "description": "<p>Message ID was not included in request.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "NoAccessRight",
+            "description": "<p>User not allowed to see requested message.</p> "
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "api/message.php",
-    "groupTitle": "Message"
+    "filename": "api/messages.php",
+    "groupTitle": "Messages"
+  },
+  {
+    "type": "get",
+    "url": "/messages.php?ticket=:ticket",
+    "title": "List Messages",
+    "name": "GetMessages",
+    "group": "Messages",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "A",
+            "description": "<p>list of messages associated with the ticket.</p> "
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidSessionCookie",
+            "description": "<p>Session cookie either does not exist or is expired.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "NoAccessRight",
+            "description": "<p>User not allowed to see messages associated with given ticket.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidTicketID",
+            "description": "<p>The ticket ID provided does not exist.</p> "
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/messages.php",
+    "groupTitle": "Messages"
   },
   {
     "type": "post",
-    "url": "/tickets.php?id=:id",
-    "title": "Create a Ticket",
+    "url": "/messages.php?ticket=:ticket",
+    "title": "Create a Message",
     "name": "PostMessage",
-    "group": "Message",
+    "group": "Messages",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -342,8 +406,15 @@
             "group": "Parameter",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "description",
-            "description": "<p>Description of the Message.</p> "
+            "field": "body",
+            "description": "<p>body of the Message.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "ticket",
+            "description": "<p>The ID of the associated ticket.</p> "
           }
         ]
       }
@@ -369,8 +440,8 @@
             "group": "Success 200",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "description",
-            "description": "<p>the Message's description.</p> "
+            "field": "body",
+            "description": "<p>the Message's body.</p> "
           },
           {
             "group": "Success 200",
@@ -381,10 +452,17 @@
           },
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "<p>Object</p> ",
             "optional": false,
             "field": "ticket",
-            "description": "<p>id of the ticket</p> "
+            "description": "<p>the ticket the message is associated with.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "sender",
+            "description": "<p>the user who sent the ticket.</p> "
           }
         ]
       }
@@ -396,8 +474,8 @@
             "group": "Error 4xx",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "InvalidMessageID",
-            "description": "<p>Message does not exist.</p> "
+            "field": "MissingTicketID",
+            "description": "<p>TicketID was not provided.</p> "
           },
           {
             "group": "Error 4xx",
@@ -410,15 +488,22 @@
             "group": "Error 4xx",
             "type": "<p>String</p> ",
             "optional": false,
-            "field": "MissingDescription",
-            "description": "<p>description parameter not supplied.</p> "
+            "field": "MissingBody",
+            "description": "<p>body parameter not supplied.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "InvalidTicketID",
+            "description": "<p>The ticket ID provided does not exist.</p> "
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "api/message.php",
-    "groupTitle": "Message"
+    "filename": "api/messages.php",
+    "groupTitle": "Messages"
   },
   {
     "type": "delete",
@@ -462,21 +547,21 @@
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "user",
-            "description": "<p>the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who created the ticket.</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "consultant",
-            "description": "<p>the user who consults for the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who consults for the ticket.</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "manager",
-            "description": "<p>the user who manages the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who manages the ticket.</p> "
           }
         ]
       }
@@ -503,42 +588,6 @@
     },
     "version": "0.0.0",
     "filename": "api/tickets.php",
-    "groupTitle": "Tickets"
-  },
-  {
-    "type": "get",
-    "url": "/message.php",
-    "title": "List Tickets",
-    "name": "GetMessage",
-    "group": "Tickets",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "<p>Object[]</p> ",
-            "optional": false,
-            "field": "messages",
-            "description": "<p>for that user</p> "
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "<p>String</p> ",
-            "optional": false,
-            "field": "InvalidSessionCookie",
-            "description": "<p>Session cookie either does not exist or is expired.</p> "
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "api/message.php",
     "groupTitle": "Tickets"
   },
   {
@@ -779,21 +828,21 @@
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "user",
-            "description": "<p>the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who created the ticket.</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "consultant",
-            "description": "<p>the user who consults for the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who consults for the ticket.</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "manager",
-            "description": "<p>the user who manages the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who manages the ticket.</p> "
           }
         ]
       }
@@ -884,21 +933,21 @@
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "user",
-            "description": "<p>the user who created the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who created the ticket.</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "consultant",
-            "description": "<p>the user who consults for the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who consults for the ticket.</p> "
           },
           {
             "group": "Success 200",
             "type": "<p>Object</p> ",
             "optional": false,
             "field": "manager",
-            "description": "<p>the user who manages the ticket. WARNING: User API is not finished yet, so this field should be ignored.</p> "
+            "description": "<p>the user who manages the ticket.</p> "
           }
         ]
       }
