@@ -4,17 +4,17 @@
     $user = new User($_SESSION['username']);
     function createTable($tickets, $userColumn = true, $consultantColumn = true, $managerColumn = true) {
         $str =
-        '<table>
+        '<table class="tab-content">
             <tr>
-                <td>Title</td>';
+                <th>Title</th>';
         if($userColumn)
-                $str .= '<td>User</td>';
+                $str .= '<th>User</th>';
         if($consultantColumn)
-                $str .= '<td>Consultant</td>';
+                $str .= '<th>Consultant</th>';
         if($managerColumn)
-                $str .= '<td>Manager</td>';
-        $str .= '<td>Status</td>
-                 <td>Date</td>
+                $str .= '<th>Manager</th>';
+        $str .= '<th>Status</th>
+                 <th>Date</th>
             </tr>';
         foreach($tickets as $ticket){
             $str .= "<tr>
@@ -34,27 +34,40 @@
 ?>
 <html>
     <head>
-        <link rel="stylesheet" href="../css/ticketStyle.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
-    <?php include("../header.php") ?>
-	<h1>Tickets</h1>
-	On this page, you can view the tickets or, if you'd like, create a new ticket.<hr> 
-        <h2>My Tickets</h2>
-        <?php echo createTable($user->getTickets(), false, true, true);?>
-        <?php if($user->getConsultantTickets() !== null):?>
-            <h2>Tickets You Consult For</h2>
-            <?php echo createTable($user->getConsultantTickets(), true, false, true);?>
-        <?php endif;?>
-        <?php if($user->getManagerTickets() !== null):?>
-            <h2>Tickets You Manage</h2>
-            <?php echo createTable($user->getManagerTickets(), true, true, false);?>
-        <?php endif;?>
+        <?php include("../header.php") ?>
+        <h1>Tickets</h1>
+        <ul class="tabs">
+            On this page, you can view the tickets or, if you'd like, create a new ticket.<hr> 
+                <li>
+                    <input type="radio" checked name="tabs" id="myTab">
+                    <label for="myTab">My Tickets</label>
+                    <?php echo createTable($user->getTickets(), false, true, true);?>
+                </li>
+                <?php if($user->getConsultantTickets() !== null):?>
+                    <li>
+                        <input type="radio" name="tabs" id="consultantTab">
+                        <label for="consultantTab">Tickets You Consult For</label>
+                        <?php echo createTable($user->getConsultantTickets(), true, false, true);?>
+                    </li>
+                <?php endif;?>
+                <?php if($user->getManagerTickets() !== null):?>
+                    <li>
+                        <input type="radio" name="tabs" id="managerTab">
+                        <label for="managerTab">Tickets You Manage</label>
+                        <?php echo createTable($user->getManagerTickets(), true, true, false);?>
+                    </li>
+                <?php endif;?>
+        </ul>
+        <div id="ticket-form">
         <h2>Create a Ticket</h2>
         <form action="create.php" method="post"> 
             <input name="title" type ="text" placeholder="Enter Title"></input>
             <textarea name="description" placeholder="Enter Description"></textarea>
             <button class="submit" type="submit" >Submit</button>
         </form>
+        </div>
     </body>
 </html>
