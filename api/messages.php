@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['ticket'])) {
         $ticket = new Ticket($_GET['ticket']);
         if ($user == $ticket->getUser() or $user->getPositionID() > Position::User) {
-            #TODO implement getMessages
             echo json_encode($ticket->getMessages());
             die();
         } else {
@@ -47,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
      * @apiError {String} MissingMessageID Message ID was not included in request.
      * @apiError {String} NoAccessRight User not allowed to see requested message.
      */
-    if(!isset($_GET['id')) {
+    if(!isset($_GET['id'])) {
         http_response_code(400);
         echo json_encode(['error' => 'MissingMessageID']);
         die();
@@ -90,7 +89,7 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode(['error' => 'MissingTicketID']);
         die();
     }
-    $ticket = $_GET['ticket'];
+    $ticket = new Ticket($_GET['ticket']);
     if ($user != $ticket->getUser() and $user->getPositionID() == Position::User) {
         http_response_code(403);
         echo json_encode(['error' => 'NoAccessRight']);

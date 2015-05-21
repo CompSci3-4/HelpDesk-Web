@@ -57,7 +57,7 @@ class Message implements JsonSerializable {
      * @return string the JSON representation of the ticket.
      */
     public function jsonSerialize() {
-        $config = Ticket::$config;
+        $config = Message::$config;
         return array(
             'id' => $this->id,
             'title' => $this->title,

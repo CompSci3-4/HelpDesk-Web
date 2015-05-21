@@ -22,6 +22,7 @@ class Ticket implements JsonSerializable {
     private $user;
     private $manager;
     private $consultant;
+    private $messages;
     /**
      * Finds a ticket within the database, with the given ID.
      *
@@ -254,6 +255,20 @@ class Ticket implements JsonSerializable {
     }
 
     public function getMessages() {
+        if(!isset($this->messages)) {
+            $query = Ticket::$db->prepare("SELECT id
+                                  FROM messages
+                                  WHERE messages.ticket = :id
+                                  ORDER BY messages.date DESC");
+            $query->bindValue(':id', $this->id);
+            $query->execute();
+            $results = $query->fetchAll();
+            $this->messages = array();
+            foreach($results as $result) {
+                array_push($this->messages, new Message($result['id']));
+            }
+        }
+        return $this->messages;
     }
 }
 
