@@ -36,6 +36,19 @@ body {
   width: 640px;
 }
 
+
+label {
+    display:block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    float: left;
+    padding-top: 5px;
+    text-align: left;
+	margin-left:auto
+	margin-right: auto;
+    width: 300px;
+}
+
 .login {
   position: relative;
   margin: auto;
