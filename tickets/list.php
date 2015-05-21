@@ -25,8 +25,9 @@
                 $str .= "<td><a href={$ticket->getConsultant()->getHTML()}>{$ticket->getConsultant()->getName()}</a></td>";
             if($managerColumn)
                 $str .= "<td><a href={$ticket->getManager()->getHTML()}>{$ticket->getManager()->getName()}</a></td>";
+            $date = date('M j', strtotime($ticket->getDate()));
             $str .= "<td>{$ticket->getStatus()}</td>
-                <td>{$ticket->getDate()}</td>
+                <td>{$date}</td>
                 </tr>";
         }
         return $str . '</table>';
@@ -44,7 +45,7 @@
                 <li>
                     <input type="radio" checked name="tabs" id="myTab">
                     <label for="myTab">My Tickets</label>
-                    <?php echo createTable($user->getTickets(), false, true, true);?>
+                    <?php echo createTable($user->getTickets(), false, true, false);?>
                 </li>
                 <?php if($user->getConsultantTickets() !== null):?>
                     <li>
