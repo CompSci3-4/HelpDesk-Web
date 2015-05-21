@@ -14,7 +14,7 @@ h2{
 body {
 	font-size: 24px;
     font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-	background-color: #80E6FF;
+	background-color: #F8F8FF;
 }
 
 td {
@@ -54,14 +54,41 @@ form * {
 
 .tabs input[type="radio"] {
     display: none;
+    background-color: #00AAFF;
+      font-weight: bold;
+  color: #527881;
+  text-shadow: 0 1px #e3f1f1;
+  background: #cde5ef;
+  border: 2px solid;
+  border-color: #b4ccce #b3c0c8 #9eb9c2;
+  border-radius: 10px;
+  outline: 0;
 }
 
 .tabs {
     list-style: none;
+    background-color: #00AAFF;
+      font-weight: bold;
+  color: #527881;
+  text-shadow: 0 1px #e3f1f1;
+  background: #cde5ef;
+  border: 2px solid;
+  border-color: #b4ccce #b3c0c8 #9eb9c2;
+  border-radius: 10px;
+  outline: 0;
 }
 
 .tabs li {
     float: left;
+    background-color: #00AAFF;
+      font-weight: bold;
+  color: #527881;
+  text-shadow: 0 1px #e3f1f1;
+  background: #cde5ef;
+  border: 2px solid;
+  border-color: #b4ccce #b3c0c8 #9eb9c2;
+  border-radius: 10px;
+  outline: 0;
 }
 
 .tabs label {
@@ -69,6 +96,15 @@ form * {
     padding: 6px;
     border-style: ridge;
     cursor: pointer;
+    background-color: #00AAFF;
+      font-weight: bold;
+  color: #527881;
+  text-shadow: 0 1px #e3f1f1;
+  background: #cde5ef;
+  border: 2px solid;
+  border-color: #b4ccce #b3c0c8 #9eb9c2;
+  border-radius: 10px;
+  outline: 0;
 }
 
 .tab-content {
