@@ -88,15 +88,7 @@ form * {
     padding: 6px;
     border-style: ridge;
     cursor: pointer;
-    background-color: #00AAFF;
-      font-weight: bold;
-  color: #527881;
-  text-shadow: 0 1px #e3f1f1;
-  background: #cde5ef;
-  border: 2px solid;
-  border-color: #b4ccce #b3c0c8 #9eb9c2;
-  border-radius: 10px;
-  outline: 0;
+    
 }
 
 .tab-content {
