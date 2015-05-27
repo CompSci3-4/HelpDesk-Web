@@ -44,7 +44,7 @@ form * {
 }
 
 #ticket-form {
-    float: right;
+    float: bottom;
 }
 
 [type="submit"] {
