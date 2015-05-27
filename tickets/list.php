@@ -72,13 +72,5 @@
                     </form>
                 </li>
         </ul>
-        <div id="ticket-form">
-        <h2>Create a Ticket</h2>
-        <form action="create.php" method="post"> 
-            <input name="title" type ="text" placeholder="Enter Title"></input>
-            <textarea name="description" placeholder="Enter Description"></textarea>
-            <button class="submit" type="submit" >Submit</button>
-        </form>
-        </div>
     </body>
 </html>
