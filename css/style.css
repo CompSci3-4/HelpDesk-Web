@@ -61,8 +61,12 @@ form * {
 
 .tabs {
     list-style: none;
+    display: none;
 }
 
+.tab.active{
+	display:block;
+}
 .tabs li {
     float: left;
     background-color: #00AAFF;
