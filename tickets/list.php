@@ -63,7 +63,7 @@
                     </li>
                 <?php endif;?>
                 <li>
-                    <input type="radio" name="tabs" id="managerTab">
+                    <input type="radio" name="tabs" id="createTab">
                     <label for="createTicket">Create Ticket</label>
                     <form action="create.php" method="post"> 
                         <input name="title" type ="text" placeholder="Enter Title"></input>
