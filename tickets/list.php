@@ -63,7 +63,6 @@
                         <?php echo createTable($user->getManagerTickets(), true, true, false);?>
                     </li>
                 <?php endif;?>
-                <?php if($user->getCreate() !== null):?>
                     <li>
                         <input type="radio" name="tabs" id="createTab">
                         <label for="createTicket">Create Ticket</label>
@@ -73,7 +72,6 @@
                             <button class="submit" type="submit" >Submit</button>
                         </form>
                     </li>
-                <?php endif;?>
         </ul>
     </body>
 </html>
