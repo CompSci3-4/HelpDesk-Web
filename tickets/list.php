@@ -28,7 +28,7 @@
             if($managerColumn)
                 $str .= "<td><a href={$ticket->getManager()->getHTML()}>{$ticket->getManager()->getName()}</a></td>";
             if($create)
-                $str .= "<td><a href={$ticket->getCreate()->getHTML()}>{$ticket->getCreate()->getName()}</a></td>";
+                $str .= "<td><a href={$ticket->createTicket()->getHTML()}>{$ticket->createTicket()->getName()}</a></td>";
             date_default_timezone_set("America/Los_Angeles");
             $date = date('M j', strtotime($ticket->getDate()));
             $str .= "<td>{$ticket->getStatus()}</td>
