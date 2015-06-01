@@ -13,8 +13,6 @@
                 $str .= '<th>Consultant</th>';
         if($managerColumn)
                 $str .= '<th>Manager</th>';
-        if($create)
-                $str .= '<th>Create</th>';
         $str .= '<th>Status</th>
                  <th>Date</th>
             </tr>';
