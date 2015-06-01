@@ -2,7 +2,7 @@
     require_once("../start_session.php");
     require_once("../database/user.php");
     $user = new User($_SESSION['username']);
-    function createTable($tickets, $userColumn = true, $consultantColumn = true, $managerColumn = true) {
+    function createTable($tickets, $userColumn = true, $consultantColumn = true, $managerColumn = true, $create = true) {
         $str =
         '<table class="tab-content">
             <tr>
@@ -13,6 +13,8 @@
                 $str .= '<th>Consultant</th>';
         if($managerColumn)
                 $str .= '<th>Manager</th>';
+        if($create)
+                $str .= '<th>Create</th>'
         $str .= '<th>Status</th>
                  <th>Date</th>
             </tr>';
@@ -25,6 +27,8 @@
                 $str .= "<td><a href={$ticket->getConsultant()->getHTML()}>{$ticket->getConsultant()->getName()}</a></td>";
             if($managerColumn)
                 $str .= "<td><a href={$ticket->getManager()->getHTML()}>{$ticket->getManager()->getName()}</a></td>";
+            if($create)
+                $str .= "<td><a href={$ticket->getCreate()->getHTML()}>{$ticket->getCreate()->getName()}</a></td>";
             date_default_timezone_set("America/Los_Angeles");
             $date = date('M j', strtotime($ticket->getDate()));
             $str .= "<td>{$ticket->getStatus()}</td>
@@ -62,6 +66,7 @@
                         <?php echo createTable($user->getManagerTickets(), true, true, false);?>
                     </li>
                 <?php endif;?>
+                <?php if($user->getCreate() !== null):?>
                     <li>
                         <input type="radio" name="tabs" id="createTab">
                         <label for="createTicket">Create Ticket</label>
@@ -71,6 +76,7 @@
                             <button class="submit" type="submit" >Submit</button>
                         </form>
                     </li>
+                <?php endif;?>
         </ul>
     </body>
 </html>
