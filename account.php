@@ -5,7 +5,7 @@
 ?>
 <html>
     <head>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/AccountStyle.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript" src="js/changePassword.js"></script>
     </head>
