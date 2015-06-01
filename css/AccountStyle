@@ -1,0 +1,125 @@
+@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
+
+h1 {
+	font-size: 48px;
+	color:black
+	padding:5px;
+	
+}
+h2{
+	font-size: 24px;
+	color:black;
+}
+
+body {
+	font-size: 24px;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	background-color: #F8F8FF;
+	
+	display: block;
+}
+
+td {
+    padding: 4px 6px;
+}
+
+table, th, td {
+	border: 1px ridge black;
+	font-size: 24px;
+} 
+table {
+	border-collapse: collapse;
+}
+
+th {
+	height: 50px;
+	background-color: #00AAFF;
+	color: black;
+} 
+
+form * {
+	display: block;
+	width: 800px;
+	margin: 10px;
+}
+
+#ticket-form {
+    float: bottom;
+}
+
+[type="submit"] {
+    width: 10em;
+    border-radius: 10px;
+	background-color: #CCCCCC;
+    background: linear-gradient(180deg, #CCCCCC, #FFFFFF);
+}
+
+.tabs input[type="radio"] {
+    display: none;
+   
+}
+
+.tabs {
+    list-style: none;
+}
+
+.tabs li {
+    float: left;
+    background-color: #00AAFF;
+      font-weight: bold;
+  color: #527881;
+  text-shadow: 0 1px #e3f1f1;
+  background: #cde5ef;
+  border: 2px solid;
+  border-color: #b4ccce #b3c0c8 #9eb9c2;
+  border-radius: 10px;
+  outline: 0;
+}
+
+.tabs label {
+  	background-color: #00AAFF;
+  	font-weight: bold;
+  	color: #527881;
+  	text-shadow: 0 1px #e3f1f1;
+  	background: #cde5ef;
+  	border: 2px solid;
+  	border-color: #b4ccce #b3c0c8 #9eb9c2;
+  	border-radius: 10px;
+  	outline: 0;
+    
+}
+
+.tab-content {
+    position: absolute;
+    left: 0;
+    display: none;
+}
+
+[id$="Tab"]:checked ~ label {
+    	background-color: #00AAFF;
+  	font-weight: bold;
+  	color: #527881;
+  	text-shadow: 0 1px #e3f1f1;
+  	background: #cde5ef;
+  	border: 2px solid;
+  	border-color: #b4ccce #b3c0c8 #9eb9c2;
+  	border-radius: 10px;
+  	outline: 0;
+}
+
+[id$="Tab"]:checked ~ .tab-content {
+    display: block;
+    background-color: #00AAFF;
+      font-weight: bold;
+  color: #527881;
+  text-shadow: 0 1px #e3f1f1;
+  background: #cde5ef;
+  border: 2px solid;
+  border-color: #b4ccce #b3c0c8 #9eb9c2;
+  border-radius: 10px;
+  outline: 0;
+}
+
+.hidden-form {
+	display: none;
+}
