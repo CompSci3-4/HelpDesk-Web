@@ -65,8 +65,8 @@
                 <?php endif;?>
                     <li>
                         <input type="radio" name="tabs" id="createTab">
-                        <label for="createTicket">Create Ticket</label>
-                        <form action="create.php" method="post"> 
+                        <label for="createTab">Create Ticket</label>
+                        <form class="tab-content" action="create.php" method="post"> 
                             <input name="title" type ="text" placeholder="Enter Title"></input>
                             <textarea name="description" placeholder="Enter Description"></textarea>
                             <button class="submit" type="submit" >Submit</button>
