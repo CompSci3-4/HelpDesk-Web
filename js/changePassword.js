@@ -6,7 +6,7 @@ $(document).ready(function() {
        var password = $("#newPassword").val(); 
        var url = "api/account.php";
        var promise = $.ajax(url, {method: 'PATCH', data: {"password": password}});
-       promise.done(function() {alert("it worked?");});
+       promise.done(function() {$("#newPassword").val("");});
        promise.fail(failure);
        return false;
     });
